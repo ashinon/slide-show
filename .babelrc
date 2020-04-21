@@ -1,0 +1,16 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "ie": 8,
+          "esmodules": true
+        },
+        "useBuiltIns": "usage",
+        "corejs": 3,
+        "modules": "false"
+      }
+    ]
+  ]
+}

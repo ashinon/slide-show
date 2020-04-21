@@ -1,0 +1,132 @@
+[
+  {
+    "duration": ["", ""],
+    "contents": [
+      {
+        "name": "h3",
+        "data": "タイ旅行のおもいで"
+      }
+    ]
+  },
+  {
+    "duration": ["", ""],
+    "contents": [
+      {
+        "name": "h3",
+        "data": "いつの話か"
+      },
+      {
+        "name": "div",
+        "styles": {
+          "height": "300px",
+          "transform-origin": "center 70%",
+          "background-image": "url(dist/img/IMG_1560.jpeg)",
+          "background-repeat": "no-repeat",
+          "background-size": "cover",
+          "background-position": "center center"
+        }
+      }
+    ]
+  },
+  {
+    "duration": ["", ""],
+    "contents": [
+      {
+        "name": "div",
+        "styles": { "margin": "auto" },
+        "data": "2019年11月に3泊4日で行ってきました。"
+      }
+    ]
+  },
+  {
+    "duration": ["", ""],
+    "contents": [
+      {
+        "name": "h3",
+        "data": "何をしたか"
+      },
+      {
+        "name": "div",
+        "styles": {
+          "height": "300px",
+          "background-image": "url(dist/img/IMG_1648.jpeg)",
+          "background-repeat": "no-repeat",
+          "background-size": "50%",
+          "background-position": "center 64%"
+        }
+      }
+    ]
+  },
+  {
+    "duration": ["", ""],
+    "contents": [
+      {
+        "name": "ul",
+        "data": [
+          "いろんなタイ料理のレストランでご飯を食べたり",
+          "お寺やパワースポットへ行ったり",
+          "満員電車に揺られたり",
+          "舟に乗ったり",
+          "市場へ行ったり",
+          "観覧車に乗ったり",
+          "マンゴーを食べたり",
+          "スカイウォークを歩いたり . . . etc"
+        ]
+      }
+    ]
+  },
+  {
+    "duration": ["", ""],
+    "contents": [
+      {
+        "name": "h3",
+        "data": "印象に残ったことは"
+      },
+      {
+        "name": "div",
+        "styles": {
+          "height": "300px",
+          "background-image": "url(dist/img/IMG_1606.jpeg)",
+          "background-repeat": "no-repeat",
+          "background-size": "cover",
+          "background-position": "center"
+        }
+      }
+    ]
+  },
+  {
+    "duration": ["", ""],
+    "contents": [
+      {
+        "name": "ul",
+        "data": [
+          "お寺にシュールな仏像がたくさんあった",
+          "仏像も建物も装飾が多くてきれいだった",
+          "食べ物全般が美味しかった",
+          "たまに凶悪に辛いものがあった",
+          "市場で食用の虫が売っていた"
+        ]
+      }
+    ]
+  },
+  {
+    "duration": ["", ""],
+    "contents": [
+      {
+        "name": "p",
+        "styles": { "text-align": "center" },
+        "data": "楽しかったのでまた行きたいです！"
+      },
+      {
+        "name": "div",
+        "styles": {
+          "height": "300px",
+          "background-image": "url(dist/img/IMG_1651.jpeg)",
+          "background-repeat": "no-repeat",
+          "background-size": "50%",
+          "background-position": "center"
+        }
+      }
+    ]
+  }
+]
