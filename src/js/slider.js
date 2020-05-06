@@ -112,10 +112,11 @@ export default class Slider {
    */
   createContentsElem(content) {
     let elem;
-    if (content.name === 'ul') {
+    const listElems = { ul: 'li', ol: 'li', dl: { dt: 'dd' } };
+    if (Object.keys(listElems).includes(content.name)) {
       elem = document.createElement(content.name);
       content.data.forEach(child => {
-        const li = document.createElement('li');
+        const li = document.createElement(listElems[content.name]);
         li.textContent = child;
         elem.appendChild(li);
       });
