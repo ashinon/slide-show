@@ -122,7 +122,7 @@ export default class Slider {
       });
     } else {
       elem = document.createElement(content.name);
-      if (content.data) elem.innerHTML = content.data;
+      if (content.data) elem.insertAdjacentHTML('beforeend', content.data);
       if (content.styles) {
         Object.keys(content.styles).forEach(styleName => {
           elem.style[styleName] = content.styles[styleName];
