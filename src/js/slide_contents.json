@@ -1,6 +1,5 @@
 [
   {
-    "duration": ["", ""],
     "contents": [
       {
         "name": "h3",
@@ -9,7 +8,6 @@
     ]
   },
   {
-    "duration": ["", ""],
     "contents": [
       {
         "name": "h3",
@@ -29,7 +27,6 @@
     ]
   },
   {
-    "duration": ["", ""],
     "contents": [
       {
         "name": "div",
@@ -39,7 +36,6 @@
     ]
   },
   {
-    "duration": ["", ""],
     "contents": [
       {
         "name": "h3",
@@ -58,7 +54,6 @@
     ]
   },
   {
-    "duration": ["", ""],
     "contents": [
       {
         "name": "ul",
@@ -76,7 +71,6 @@
     ]
   },
   {
-    "duration": ["", ""],
     "contents": [
       {
         "name": "h3",
@@ -95,7 +89,6 @@
     ]
   },
   {
-    "duration": ["", ""],
     "contents": [
       {
         "name": "ul",
@@ -110,7 +103,6 @@
     ]
   },
   {
-    "duration": ["", ""],
     "contents": [
       {
         "name": "p",

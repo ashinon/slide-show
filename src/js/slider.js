@@ -9,12 +9,21 @@ export default class Slider {
    * @param {number} ms
    * @param {number} loopLimit
    * @param {boolean} dispTileList
+   * @param {string} imgPath 背景画像ありの要素を使用する場合にファイル名より前のパスを設定する
    */
-  constructor(target, slideContents, ms = 4500, loopLimit = 1, dispTileList = false) {
+  constructor(
+    target,
+    slideContents,
+    ms = 4500,
+    loopLimit = 1,
+    dispTileList = false,
+    imgPath = 'dist/img/'
+  ) {
     this.target = target;
     this.playSpeed = ms;
     this.limit = loopLimit;
     this.dispTitleList = dispTileList;
+    this.imgPath = imgPath;
     this.screen = this.target.querySelector('.slideScreen');
     this.prev = this.target.querySelector('.slidePrev');
     this.next = this.target.querySelector('.slideNext');
@@ -26,6 +35,33 @@ export default class Slider {
     this.contents = [];
     this.convertToElem(slideContents);
     this.setSlider();
+    this.hideLoadingAnime();
+  }
+
+  /**
+   * 背景画像読み込み完了時に読み込み中アニメーションを非表示
+   */
+  hideLoadingAnime() {
+    const bgPhotos = this.screen.querySelectorAll('.toBeMonitored');
+    const imgPath = this.imgPath;
+    bgPhotos.forEach(bgPhoto => {
+      let url =
+        bgPhoto.style['background-image'] ||
+        window.getComputedStyle(bgPhoto, '')['background-image'];
+      if (imgPath) {
+        url = url.replace(/^url.+?img\/([^/]+?)"\)/, '$1').replace(/(.+?)$/, imgPath + '$1');
+      } else {
+        url = url.replace(/^url.+?img\/([^/]+?)"\)/, '$1').replace(/(.+?)$/, '$1');
+      }
+      const img = document.createElement('img');
+      img.src = url;
+      img.width = img.height = 1;
+      bgPhoto.appendChild(img);
+      img.onload = () => {
+        bgPhoto.querySelector('.preLoading').style.display = 'none';
+        bgPhoto.removeChild(img);
+      };
+    });
   }
 
   /**
@@ -114,6 +150,7 @@ export default class Slider {
     let elem;
     const listElems = { ul: 'li', ol: 'li', dl: { dt: 'dd' } };
     if (Object.keys(listElems).includes(content.name)) {
+      // リストエレメントの生成
       elem = document.createElement(content.name);
       content.data.forEach(child => {
         const li = document.createElement(listElems[content.name]);
@@ -121,11 +158,20 @@ export default class Slider {
         elem.appendChild(li);
       });
     } else {
+      // リストエレメント以外の生成
       elem = document.createElement(content.name);
-      if (content.data) elem.innerHTML = content.data;
+      if (content.data) elem.insertAdjacentHTML('beforeend', content.data);
       if (content.styles) {
         Object.keys(content.styles).forEach(styleName => {
           elem.style[styleName] = content.styles[styleName];
+          if (styleName == 'background-image') {
+            // background-imageの指定がある要素の場合、ローダーを設定する
+            elem.style['display'] = 'flex';
+            elem.style['justify-content'] = 'center';
+            elem.style['align-items'] = 'center';
+            elem.classList.add('toBeMonitored');
+            elem.insertAdjacentHTML('beforeend', '<div class="preLoading">Loading...</div>');
+          }
         });
       }
       if (content.classList) {
@@ -156,6 +202,7 @@ export default class Slider {
       this.screen.textContent = null;
       this.screen.appendChild(this.contents[showTarget]);
       this.changeScreenStyle();
+      this.hideLoadingAnime();
     });
   }
 
@@ -178,6 +225,7 @@ export default class Slider {
         this.screen.textContent = null;
         this.screen.appendChild(this.contents[this.current]);
         this.changeScreenStyle();
+        this.hideLoadingAnime();
       } else {
         return false;
       }
@@ -203,6 +251,7 @@ export default class Slider {
         this.screen.textContent = null;
         this.screen.appendChild(this.contents[this.current]);
         this.changeScreenStyle();
+        this.hideLoadingAnime();
       } else {
         return false;
       }
