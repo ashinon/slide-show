@@ -77,9 +77,9 @@ export default class Slider {
 
   /**
    * JsonデータからHTMLエレメントを生成する
-   * @param {array} dataList
+   * @param {array} pages
    */
-  convertToElem(dataList) {
+  convertToElem(pages) {
     // タイトルリスト部分のスタイルを設定する
     if (this.dispTitleList) {
       this.slideNaviList.classList.add('titleList');
@@ -87,25 +87,25 @@ export default class Slider {
       this.slideNaviList.classList.add('indicator');
     }
 
-    dataList.forEach((data, i) => {
+    pages.forEach((page, i) => {
       // リストタグを作る
-      const list = this.createNaviElem(data, i);
+      const list = this.createNaviElem(page, i);
 
       // コンテンツ表示部分を作る
       const screen = document.createElement('div');
       this.contentIdPrefix = 'slideContents_';
       screen.setAttribute('id', this.contentIdPrefix + i);
       screen.classList.add('slide-contents');
-      if (data.styles) {
-        Object.keys(data.styles).forEach(styleName => {
-          screen.style[styleName] = data.styles[styleName];
+      if (page.styles) {
+        Object.keys(page.styles).forEach(styleName => {
+          screen.style[styleName] = page.styles[styleName];
         });
       }
 
       // コンテンツを作る
       const contents = document.createElement('div');
-      data.contents.forEach(content => {
-        let elem = this.createContentsElem(content);
+      page.contents.forEach(part => {
+        let elem = this.createContentsElem(part);
         contents.appendChild(elem);
       });
 
@@ -123,11 +123,11 @@ export default class Slider {
 
   /**
    * スライドのタイトルリストを作る
-   * @param {str} data
+   * @param {str} page
    * @param {num} idx
    * @return {obj}
    */
-  createNaviElem(data, idx) {
+  createNaviElem(page, idx) {
     const list = document.createElement('li');
     this.listIdPrefix = 'slideLbl_';
     list.setAttribute('id', this.listIdPrefix + idx);
@@ -135,7 +135,7 @@ export default class Slider {
       list.classList.add('selected');
     }
     if (this.dispTitleList) {
-      list.textContent = data.title;
+      list.textContent = page.title;
     }
     this.slideNaviList.appendChild(list);
     return list;
@@ -143,15 +143,15 @@ export default class Slider {
 
   /**
    * スライダーメインコンテンツを作る
-   * @param {obj} content
+   * @param {obj} part
    * @return {obj}
    */
-  createContentsElem(content) {
+  createContentsElem(part) {
     // tagで指定された要素を作る
-    let elem = document.createElement(content.tag);
-    switch (content.tag) {
+    let elem = document.createElement(part.tag);
+    switch (part.tag) {
       case 'dl':
-        content.data.forEach(part => {
+        part.content.forEach(part => {
           const div = document.createElement('div');
           const dt = document.createElement('dt');
           const dd = document.createElement('dd');
@@ -163,27 +163,27 @@ export default class Slider {
         });
         break;
       case 'ul':
-        content.data.forEach(part => {
+        part.content.forEach(part => {
           const li = document.createElement('li');
           li.textContent = part;
           elem.appendChild(li);
         });
         break;
       case 'ol':
-        content.data.forEach(part => {
+        part.content.forEach(part => {
           const li = document.createElement('li');
           li.textContent = part;
           elem.appendChild(li);
         });
         break;
       default:
-        if (content.data) elem.insertAdjacentHTML('beforeend', content.data);
+        if (part.content) elem.insertAdjacentHTML('beforeend', part.content);
         break;
     }
     // stylesで指定されたstyleを付ける
-    if (content.styles) {
-      Object.keys(content.styles).forEach(styleName => {
-        elem.style[styleName] = content.styles[styleName];
+    if (part.styles) {
+      Object.keys(part.styles).forEach(styleName => {
+        elem.style[styleName] = part.styles[styleName];
         if (styleName == 'background-image') {
           // background-imageの指定がある要素の場合、ローダーを設定する
           elem.style['display'] = 'flex';
@@ -195,8 +195,8 @@ export default class Slider {
       });
     }
     // classesで指定されたclassを付ける
-    if (content.classes) {
-      content.classes.forEach(child => {
+    if (part.classes) {
+      part.classes.forEach(child => {
         elem.classList.add(child);
       });
     }
