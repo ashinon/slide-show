@@ -2,19 +2,31 @@
   {
     "contents": [
       {
-        "name": "h3",
-        "data": "タイ旅行のおもいで"
+        "tag": "h3",
+        "content": "タイ旅行のおもいで"
       }
     ]
   },
   {
     "contents": [
       {
-        "name": "h3",
-        "data": "いつの話か"
+        "tag": "h3",
+        "content": "IMGテスト"
       },
       {
-        "name": "div",
+        "tag": "IMG",
+        "href": "dist/img/IMG_1560.jpeg"
+      }
+    ]
+  },
+  {
+    "contents": [
+      {
+        "tag": "h3",
+        "content": "いつの話か"
+      },
+      {
+        "tag": "div",
         "styles": {
           "height": "300px",
           "transform-origin": "center 70%",
@@ -29,20 +41,20 @@
   {
     "contents": [
       {
-        "name": "div",
+        "tag": "div",
         "styles": { "margin": "auto" },
-        "data": "2019年11月に3泊4日で行ってきました。"
+        "content": "2019年11月に3泊4日で行ってきました。"
       }
     ]
   },
   {
     "contents": [
       {
-        "name": "h3",
-        "data": "何をしたか"
+        "tag": "h3",
+        "content": "何をしたか"
       },
       {
-        "name": "div",
+        "tag": "div",
         "styles": {
           "height": "300px",
           "background-image": "url(dist/img/IMG_1648.jpeg)",
@@ -56,8 +68,8 @@
   {
     "contents": [
       {
-        "name": "ul",
-        "data": [
+        "tag": "ul",
+        "content": [
           "いろんなタイ料理のレストランでご飯を食べたり",
           "お寺やパワースポットへ行ったり",
           "満員電車に揺られたり",
@@ -73,11 +85,11 @@
   {
     "contents": [
       {
-        "name": "h3",
-        "data": "印象に残ったことは"
+        "tag": "h3",
+        "content": "印象に残ったことは"
       },
       {
-        "name": "div",
+        "tag": "div",
         "styles": {
           "height": "300px",
           "background-image": "url(dist/img/IMG_1606.jpeg)",
@@ -91,8 +103,8 @@
   {
     "contents": [
       {
-        "name": "ul",
-        "data": [
+        "tag": "ul",
+        "content": [
           "お寺にシュールな仏像がたくさんあった",
           "仏像も建物も装飾が多くてきれいだった",
           "食べ物全般が美味しかった",
@@ -105,12 +117,12 @@
   {
     "contents": [
       {
-        "name": "p",
+        "tag": "p",
         "styles": { "text-align": "center" },
-        "data": "楽しかったのでまた行きたいです！"
+        "content": "楽しかったのでまた行きたいです！"
       },
       {
-        "name": "div",
+        "tag": "div",
         "styles": {
           "height": "300px",
           "background-image": "url(dist/img/IMG_1651.jpeg)",
