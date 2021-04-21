@@ -147,38 +147,58 @@ export default class Slider {
    * @return {obj}
    */
   createContentsElem(content) {
-    let elem;
-    const listElems = { ul: 'li', ol: 'li', dl: { dt: 'dd' } };
-    if (Object.keys(listElems).includes(content.name)) {
-      // リストエレメントの生成
-      elem = document.createElement(content.name);
-      content.data.forEach(child => {
-        const li = document.createElement(listElems[content.name]);
-        li.textContent = child;
-        elem.appendChild(li);
+    // nameで指定された要素を作る
+    let elem = document.createElement(content.name);
+    switch (content.name) {
+      case 'dl':
+        content.data.forEach(part => {
+          const div = document.createElement('div');
+          const dt = document.createElement('dt');
+          const dd = document.createElement('dd');
+          dt.textContent = part.dt;
+          dd.textContent = part.dd;
+          div.appendChild(dt);
+          div.appendChild(dd);
+          elem.appendChild(div);
+        });
+        break;
+      case 'ul':
+        content.data.forEach(part => {
+          const li = document.createElement('li');
+          li.textContent = part;
+          elem.appendChild(li);
+        });
+        break;
+      case 'ol':
+        content.data.forEach(part => {
+          const li = document.createElement('li');
+          li.textContent = part;
+          elem.appendChild(li);
+        });
+        break;
+      default:
+        if (content.data) elem.insertAdjacentHTML('beforeend', content.data);
+        break;
+    }
+    // stylesで指定されたstyleを付ける
+    if (content.styles) {
+      Object.keys(content.styles).forEach(styleName => {
+        elem.style[styleName] = content.styles[styleName];
+        if (styleName == 'background-image') {
+          // background-imageの指定がある要素の場合、ローダーを設定する
+          elem.style['display'] = 'flex';
+          elem.style['justify-content'] = 'center';
+          elem.style['align-items'] = 'center';
+          elem.classList.add('toBeMonitored');
+          elem.insertAdjacentHTML('beforeend', '<div class="preLoading">Loading...</div>');
+        }
       });
-    } else {
-      // リストエレメント以外の生成
-      elem = document.createElement(content.name);
-      if (content.data) elem.insertAdjacentHTML('beforeend', content.data);
-      if (content.styles) {
-        Object.keys(content.styles).forEach(styleName => {
-          elem.style[styleName] = content.styles[styleName];
-          if (styleName == 'background-image') {
-            // background-imageの指定がある要素の場合、ローダーを設定する
-            elem.style['display'] = 'flex';
-            elem.style['justify-content'] = 'center';
-            elem.style['align-items'] = 'center';
-            elem.classList.add('toBeMonitored');
-            elem.insertAdjacentHTML('beforeend', '<div class="preLoading">Loading...</div>');
-          }
-        });
-      }
-      if (content.classList) {
-        content.classList.forEach(child => {
-          elem.classList.add(child);
-        });
-      }
+    }
+    // classesで指定されたclassを付ける
+    if (content.classes) {
+      content.classes.forEach(child => {
+        elem.classList.add(child);
+      });
     }
     return elem;
   }
