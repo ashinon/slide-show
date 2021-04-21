@@ -147,9 +147,9 @@ export default class Slider {
    * @return {obj}
    */
   createContentsElem(content) {
-    // nameで指定された要素を作る
-    let elem = document.createElement(content.name);
-    switch (content.name) {
+    // tagで指定された要素を作る
+    let elem = document.createElement(content.tag);
+    switch (content.tag) {
       case 'dl':
         content.data.forEach(part => {
           const div = document.createElement('div');

@@ -2,7 +2,7 @@
   {
     "contents": [
       {
-        "name": "h3",
+        "tag": "h3",
         "data": "タイ旅行のおもいで"
       }
     ]
@@ -10,11 +10,11 @@
   {
     "contents": [
       {
-        "name": "h3",
+        "tag": "h3",
         "data": "いつの話か"
       },
       {
-        "name": "div",
+        "tag": "div",
         "styles": {
           "height": "300px",
           "transform-origin": "center 70%",
@@ -29,7 +29,7 @@
   {
     "contents": [
       {
-        "name": "div",
+        "tag": "div",
         "styles": { "margin": "auto" },
         "data": "2019年11月に3泊4日で行ってきました。"
       }
@@ -38,11 +38,11 @@
   {
     "contents": [
       {
-        "name": "h3",
+        "tag": "h3",
         "data": "何をしたか"
       },
       {
-        "name": "div",
+        "tag": "div",
         "styles": {
           "height": "300px",
           "background-image": "url(dist/img/IMG_1648.jpeg)",
@@ -56,7 +56,7 @@
   {
     "contents": [
       {
-        "name": "ul",
+        "tag": "ul",
         "data": [
           "いろんなタイ料理のレストランでご飯を食べたり",
           "お寺やパワースポットへ行ったり",
@@ -73,11 +73,11 @@
   {
     "contents": [
       {
-        "name": "h3",
+        "tag": "h3",
         "data": "印象に残ったことは"
       },
       {
-        "name": "div",
+        "tag": "div",
         "styles": {
           "height": "300px",
           "background-image": "url(dist/img/IMG_1606.jpeg)",
@@ -91,7 +91,7 @@
   {
     "contents": [
       {
-        "name": "ul",
+        "tag": "ul",
         "data": [
           "お寺にシュールな仏像がたくさんあった",
           "仏像も建物も装飾が多くてきれいだった",
@@ -105,12 +105,12 @@
   {
     "contents": [
       {
-        "name": "p",
+        "tag": "p",
         "styles": { "text-align": "center" },
         "data": "楽しかったのでまた行きたいです！"
       },
       {
-        "name": "div",
+        "tag": "div",
         "styles": {
           "height": "300px",
           "background-image": "url(dist/img/IMG_1651.jpeg)",
