@@ -176,6 +176,12 @@ export default class Slider {
           elem.appendChild(li);
         });
         break;
+      case 'img':
+        elem = document.createElement('div');
+        elem.classList.add('has-bg-img');
+        if (!part.styles) part.styles = [];
+        part.styles['background-image'] = 'url(' + part.src + ')';
+        break;
       default:
         if (part.content) elem.insertAdjacentHTML('beforeend', part.content);
         break;
