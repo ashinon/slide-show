@@ -1,0 +1,198 @@
+@charset "UTF-8";
+
+/****************************************
+  Slider
+****************************************/
+.slider {
+  width: 100%;
+  min-height: 430px;
+  margin: auto;
+  position: relative;
+}
+
+.slideNavi {
+  width: 100%;
+}
+
+.slideArea {
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: center;
+}
+
+.slideScreen {
+  width: 80%;
+  min-height: 320px;
+  max-height: 700px;
+  margin: auto 0;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 1;
+  background-image: radial-gradient(
+    rgba(255, 255, 255, 1) 65%,
+    rgba(255, 255, 255, 0.9) 80%,
+    rgba(255, 255, 255, 0.6) 100%
+  );
+  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.slider i {
+  width: calc(5% + 25px);
+  min-width: 50px;
+  font-size: 100px;
+  position: relative;
+  cursor: pointer;
+}
+
+.slider i::before,
+.slider i::after {
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0px 3px 5px rgba(60, 60, 60, 0.2);
+  position: absolute;
+  top: calc(50% - 0.5em);
+}
+
+.slider i.slidePrev::before {
+  left: 0;
+}
+
+.slider i.slideNext::before {
+  right: 0;
+}
+
+.slide-contents {
+  width: 100%;
+  max-width: 900px;
+  height: auto;
+  min-height: 350px;
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.slide-contents .has-bg-img {
+  height: 300px;
+  transform-origin: center 70%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+.slide-contents ul {
+  width: auto;
+  max-width: 90%;
+  margin: 0.75em auto 0 auto;
+  text-align: left;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.slide-contents li {
+  min-width: calc(50% - 2.5em);
+  margin: 0 1.75em 0.75em 0;
+}
+
+.slide-contents p {
+  width: 90%;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.slideScreen dl,
+.slideScreen ul,
+.slideScreen ol {
+  margin-top: 25px;
+}
+
+.slideScreen dl div {
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.slideScreen dl dt::after {
+  content: '：';
+  margin-right: 0.5em;
+}
+
+/* iPadまで */
+@media screen and (min-width: 601px) and (max-width: 767px) {
+  .slideScreen {
+    width: 100%;
+    min-height: 320px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .slideScreen {
+    width: 100%;
+    min-height: 280px;
+    margin: auto;
+    padding: 10px;
+  }
+
+  .slide-contents ul {
+    flex-direction: column;
+  }
+
+  .slide-contents li {
+    margin: 0 0 0.75em 1em;
+  }
+
+  .slider i.fas {
+    display: none;
+  }
+}
+
+.slideNavi ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-flow: row wrap;
+  list-style: none;
+  align-content: center;
+}
+
+.slideNavi li {
+  width: 23.5%;
+  margin: 10px 2% 10px 0;
+  cursor: pointer;
+}
+
+.slideNavi li:nth-child(4n) {
+  margin-right: 0;
+}
+
+.slideNavi ul.indicator {
+  width: 100%;
+  height: 30px;
+  margin: 0 auto 10px auto;
+  justify-content: center;
+}
+
+.slideNavi .indicator li {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin: 0 5px;
+  border-radius: 50%;
+  background-color: #ddd;
+}
+
+.slideNavi .indicator li:hover {
+  background-color: #999;
+}
+
+.slideNavi .indicator li.selected {
+  background-color: #999;
+}

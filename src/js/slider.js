@@ -151,30 +151,36 @@ export default class Slider {
     let elem = document.createElement(part.tag);
     switch (part.tag) {
       case 'dl':
-        part.content.forEach(part => {
+        part.content.forEach(child => {
           const div = document.createElement('div');
           const dt = document.createElement('dt');
           const dd = document.createElement('dd');
-          dt.textContent = part.dt;
-          dd.textContent = part.dd;
+          dt.textContent = child.dt;
+          dd.textContent = child.dd;
           div.appendChild(dt);
           div.appendChild(dd);
           elem.appendChild(div);
         });
         break;
       case 'ul':
-        part.content.forEach(part => {
+        part.content.forEach(child => {
           const li = document.createElement('li');
-          li.textContent = part;
+          li.textContent = child;
           elem.appendChild(li);
         });
         break;
       case 'ol':
-        part.content.forEach(part => {
+        part.content.forEach(child => {
           const li = document.createElement('li');
-          li.textContent = part;
+          li.textContent = child;
           elem.appendChild(li);
         });
+        break;
+      case 'img':
+        elem = document.createElement('div');
+        elem.classList.add('has-bg-img');
+        if (!part.styles) part.styles = [];
+        part.styles['background-image'] = 'url(' + part.src + ')';
         break;
       default:
         if (part.content) elem.insertAdjacentHTML('beforeend', part.content);
