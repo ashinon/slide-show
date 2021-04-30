@@ -20,6 +20,7 @@ export default class Slider {
     imgPath = 'dist/img/'
   ) {
     this.target = target;
+    this.slideContents = slideContents;
     this.playSpeed = ms;
     this.limit = loopLimit;
     this.dispTitleList = dispTileList;
@@ -28,20 +29,19 @@ export default class Slider {
     this.prev = this.target.querySelector('.slidePrev');
     this.next = this.target.querySelector('.slideNext');
     this.slideNaviList = this.target.querySelector('.slideNaviList');
+    this.contentIdPrefix = 'slideContents_';
     this.clickBtn = true;
     this.current = 0; // 現在のスライド
     this.allSlideCount = 0; // スライドの総数
     this.playCount = 0; // オートプレイのカウント
     this.contents = [];
-    this.convertToElem(slideContents);
     this.setSlider();
-    this.hideLoadingAnime();
   }
 
   /**
-   * 背景画像読み込み完了時に読み込み中アニメーションを非表示
+   * 背景画像読み込み完了時に読み込み中アニメーションを非表示(個別画像用)
    */
-  hideLoadingAnime() {
+  hideLoader() {
     const bgPhotos = this.screen.querySelectorAll('.toBeMonitored');
     const imgPath = this.imgPath;
     bgPhotos.forEach(bgPhoto => {
@@ -65,9 +65,69 @@ export default class Slider {
   }
 
   /**
-   * スライダー
+   * スライダー表示エリアを読み込み中表示(ローダー)で隠す
+   * @param {HTMLElement} toMask
+   */
+  maskSlideScreen() {
+    this.screen.insertAdjacentHTML(
+      'beforeend',
+      '<div class="slide-contents box-for-loading"><div class="slideshow-loading-all">Loading...</div></div>'
+    );
+  }
+
+  /**
+   * 全画像をキャッシュに保存し終わったタイミングで読み込み中表示を解除
+   */
+  async hideScreenLoader() {
+    await this.savedInCache(this.slideContents);
+    // キャッシュに保存し終わったらローダーを非表示にする
+    const target = this.screen.querySelector('.box-for-loading');
+    target.style.display = 'none';
+  }
+
+  /**
+   * 全ページの画像を全て読み込む
+   * @param {array} pages
+   */
+  savedInCache(pages) {
+    const urls = [];
+    const tmpContainer = document.createElement('div');
+    pages.forEach(page => {
+      page.contents.forEach(part => {
+        if (part.styles) {
+          if (Object.keys(part.styles).includes('background-image')) {
+            let url = part.styles['background-image'];
+            url = url.replace(/^url\(([^\\]+?.[a-z A-Z]+?)\)/, '$1');
+            urls.push(url);
+          }
+        }
+      });
+    });
+    urls.forEach((url, i) => {
+      const img = document.createElement('img');
+      img.src = url;
+      img.width = img.height = 1;
+      tmpContainer.appendChild(img);
+      window.addEventListener(
+        'load',
+        () => {
+          if (i == urls.length - 1) {
+            tmpContainer.remove();
+          }
+        },
+        { once: true }
+      );
+    });
+  }
+
+  /**
+   * スライダーを作る
    */
   setSlider() {
+    this.maskSlideScreen();
+    this.convertToElem(this.slideContents);
+    this.hideScreenLoader().catch(error => console.error(error.message));
+    this.setFirstContent(this.contents[0]);
     this.setPrevsEvent();
     this.setNextsEvent();
     this.addEventTouch();
@@ -93,7 +153,6 @@ export default class Slider {
 
       // コンテンツ表示部分を作る
       const screen = document.createElement('div');
-      this.contentIdPrefix = 'slideContents_';
       screen.setAttribute('id', this.contentIdPrefix + i);
       screen.classList.add('slide-contents');
       if (page.styles) {
@@ -112,9 +171,7 @@ export default class Slider {
       // コンテンツ表示部分に格納する
       screen.appendChild(contents);
       this.contents.push(screen);
-      if (i === 0) {
-        this.screen.appendChild(screen);
-      }
+
       // タイトルリストのクリックイベントを設定する
       this.setListClickEvent(list, i);
     });
@@ -210,6 +267,14 @@ export default class Slider {
   }
 
   /**
+   * JsonデータからHTMLエレメントを生成する
+   * @param {HTMLElement} page
+   */
+  setFirstContent(page) {
+    this.screen.appendChild(page);
+  }
+
+  /**
    * list押下時のイベントをセット
    * @param {object} list
    * @param {number} length
@@ -228,7 +293,7 @@ export default class Slider {
       this.screen.textContent = null;
       this.screen.appendChild(this.contents[showTarget]);
       this.changeScreenStyle();
-      this.hideLoadingAnime();
+      this.hideLoader();
     });
   }
 
@@ -251,7 +316,7 @@ export default class Slider {
         this.screen.textContent = null;
         this.screen.appendChild(this.contents[this.current]);
         this.changeScreenStyle();
-        this.hideLoadingAnime();
+        this.hideLoader();
       } else {
         return false;
       }
@@ -277,7 +342,7 @@ export default class Slider {
         this.screen.textContent = null;
         this.screen.appendChild(this.contents[this.current]);
         this.changeScreenStyle();
-        this.hideLoadingAnime();
+        this.hideLoader();
       } else {
         return false;
       }
