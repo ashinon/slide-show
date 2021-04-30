@@ -35,7 +35,6 @@ export default class Slider {
     this.allSlideCount = 0; // スライドの総数
     this.playCount = 0; // オートプレイのカウント
     this.contents = [];
-    this.convertToElem(slideContents);
     this.setSlider();
   }
 
@@ -122,9 +121,13 @@ export default class Slider {
   }
 
   /**
-   * スライダー
+   * スライダーを作る
    */
   setSlider() {
+    this.maskSlideScreen();
+    this.convertToElem(this.slideContents);
+    this.hideScreenLoader().catch(error => console.error(error.message));
+    this.setFirstContent(this.contents[0]);
     this.setPrevsEvent();
     this.setNextsEvent();
     this.addEventTouch();
@@ -168,9 +171,7 @@ export default class Slider {
       // コンテンツ表示部分に格納する
       screen.appendChild(contents);
       this.contents.push(screen);
-      if (i === 0) {
-        this.screen.appendChild(screen);
-      }
+
       // タイトルリストのクリックイベントを設定する
       this.setListClickEvent(list, i);
     });
@@ -263,6 +264,14 @@ export default class Slider {
       });
     }
     return elem;
+  }
+
+  /**
+   * JsonデータからHTMLエレメントを生成する
+   * @param {HTMLElement} page
+   */
+  setFirstContent(page) {
+    this.screen.appendChild(page);
   }
 
   /**
