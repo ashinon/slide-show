@@ -39,7 +39,18 @@ export default class Slider {
   }
 
   /**
+   * スライダーを作る
    */
+  setSlider() {
+    this.maskSlideScreen();
+    this.convertToElem(this.slideContents);
+    this.hideScreenLoader().catch(error => console.error(error.message));
+    this.setFirstContent(this.contents[0]);
+    this.setPrevsEvent();
+    this.setNextsEvent();
+    this.addEventTouch();
+    this.addEventScreenClick();
+    this.autoPlay();
   }
 
   /**
@@ -96,21 +107,6 @@ export default class Slider {
         { once: true }
       );
     });
-  }
-
-  /**
-   * スライダーを作る
-   */
-  setSlider() {
-    this.maskSlideScreen();
-    this.convertToElem(this.slideContents);
-    this.hideScreenLoader().catch(error => console.error(error.message));
-    this.setFirstContent(this.contents[0]);
-    this.setPrevsEvent();
-    this.setNextsEvent();
-    this.addEventTouch();
-    this.addEventScreenClick();
-    this.autoPlay();
   }
 
   /**
