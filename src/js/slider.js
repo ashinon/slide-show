@@ -39,29 +39,7 @@ export default class Slider {
   }
 
   /**
-   * 背景画像読み込み完了時に読み込み中アニメーションを非表示(個別画像用)
    */
-  hideLoader() {
-    const bgPhotos = this.screen.querySelectorAll('.toBeMonitored');
-    const imgPath = this.imgPath;
-    bgPhotos.forEach(bgPhoto => {
-      let url =
-        bgPhoto.style['background-image'] ||
-        window.getComputedStyle(bgPhoto, '')['background-image'];
-      if (imgPath) {
-        url = url.replace(/^url.+?img\/([^/]+?)"\)/, '$1').replace(/(.+?)$/, imgPath + '$1');
-      } else {
-        url = url.replace(/^url.+?img\/([^/]+?)"\)/, '$1').replace(/(.+?)$/, '$1');
-      }
-      const img = document.createElement('img');
-      img.src = url;
-      img.width = img.height = 1;
-      bgPhoto.appendChild(img);
-      img.onload = () => {
-        bgPhoto.querySelector('.preLoading').style.display = 'none';
-        bgPhoto.removeChild(img);
-      };
-    });
   }
 
   /**
@@ -437,5 +415,31 @@ export default class Slider {
       },
       { passive: true }
     );
+  }
+
+  /**
+   * 背景画像読み込み完了時に読み込み中アニメーションを非表示(個別画像用)
+   */
+  hideLoader() {
+    const bgPhotos = this.screen.querySelectorAll('.toBeMonitored');
+    const imgPath = this.imgPath;
+    bgPhotos.forEach(bgPhoto => {
+      let url =
+        bgPhoto.style['background-image'] ||
+        window.getComputedStyle(bgPhoto, '')['background-image'];
+      if (imgPath) {
+        url = url.replace(/^url.+?img\/([^/]+?)"\)/, '$1').replace(/(.+?)$/, imgPath + '$1');
+      } else {
+        url = url.replace(/^url.+?img\/([^/]+?)"\)/, '$1').replace(/(.+?)$/, '$1');
+      }
+      const img = document.createElement('img');
+      img.src = url;
+      img.width = img.height = 1;
+      bgPhoto.appendChild(img);
+      img.onload = () => {
+        bgPhoto.querySelector('.preLoading').style.display = 'none';
+        bgPhoto.removeChild(img);
+      };
+    });
   }
 }
