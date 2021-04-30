@@ -20,6 +20,7 @@ export default class Slider {
     imgPath = 'dist/img/'
   ) {
     this.target = target;
+    this.slideContents = slideContents;
     this.playSpeed = ms;
     this.limit = loopLimit;
     this.dispTitleList = dispTileList;
@@ -42,6 +43,62 @@ export default class Slider {
    * 背景画像読み込み完了時に読み込み中アニメーションを非表示
    */
   hideLoadingAnime() {
+  /**
+   * スライダー表示エリアを読み込み中表示(ローダー)で隠す
+   * @param {HTMLElement} toMask
+   */
+  maskSlideScreen() {
+    this.screen.insertAdjacentHTML(
+      'beforeend',
+      '<div class="slide-contents box-for-loading"><div class="slideshow-loading-all">Loading...</div></div>'
+    );
+  }
+
+  /**
+   * 全画像をキャッシュに保存し終わったタイミングで読み込み中表示を解除
+   */
+  async hideScreenLoader() {
+    await this.savedInCache(this.slideContents);
+    // キャッシュに保存し終わったらローダーを非表示にする
+    const target = this.screen.querySelector('.box-for-loading');
+    target.style.display = 'none';
+  }
+
+  /**
+   * 全ページの画像を全て読み込む
+   * @param {array} pages
+   */
+  savedInCache(pages) {
+    const urls = [];
+    const tmpContainer = document.createElement('div');
+    pages.forEach(page => {
+      page.contents.forEach(part => {
+        if (part.styles) {
+          if (Object.keys(part.styles).includes('background-image')) {
+            let url = part.styles['background-image'];
+            url = url.replace(/^url\(([^\\]+?.[a-z A-Z]+?)\)/, '$1');
+            urls.push(url);
+          }
+        }
+      });
+    });
+    urls.forEach((url, i) => {
+      const img = document.createElement('img');
+      img.src = url;
+      img.width = img.height = 1;
+      tmpContainer.appendChild(img);
+      window.addEventListener(
+        'load',
+        () => {
+          if (i == urls.length - 1) {
+            tmpContainer.remove();
+          }
+        },
+        { once: true }
+      );
+    });
+  }
+
     const bgPhotos = this.screen.querySelectorAll('.toBeMonitored');
     const imgPath = this.imgPath;
     bgPhotos.forEach(bgPhoto => {
