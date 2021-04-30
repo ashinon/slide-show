@@ -29,6 +29,7 @@ export default class Slider {
     this.prev = this.target.querySelector('.slidePrev');
     this.next = this.target.querySelector('.slideNext');
     this.slideNaviList = this.target.querySelector('.slideNaviList');
+    this.contentIdPrefix = 'slideContents_';
     this.clickBtn = true;
     this.current = 0; // 現在のスライド
     this.allSlideCount = 0; // スライドの総数
@@ -149,7 +150,6 @@ export default class Slider {
 
       // コンテンツ表示部分を作る
       const screen = document.createElement('div');
-      this.contentIdPrefix = 'slideContents_';
       screen.setAttribute('id', this.contentIdPrefix + i);
       screen.classList.add('slide-contents');
       if (page.styles) {
