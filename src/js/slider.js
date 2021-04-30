@@ -246,6 +246,7 @@ export default class Slider {
    */
   setFirstContent(page) {
     this.screen.appendChild(page);
+    this.hideLoader();
   }
 
   /**
