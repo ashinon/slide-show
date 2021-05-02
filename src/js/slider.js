@@ -9,21 +9,12 @@ export default class Slider {
    * @param {number} ms
    * @param {number} loopLimit
    * @param {boolean} dispTileList
-   * @param {string} imgPath 背景画像ありの要素を使用する場合にファイル名より前のパスを設定する
    */
-  constructor(
-    target,
-    slideContents,
-    ms = 4500,
-    loopLimit = 1,
-    dispTileList = false,
-    imgPath = 'dist/img/'
-  ) {
+  constructor(target, slideContents, ms = 4500, loopLimit = 1, dispTileList = false) {
     this.target = target;
     this.playSpeed = ms;
     this.limit = loopLimit;
     this.dispTitleList = dispTileList;
-    this.imgPath = imgPath;
     this.screen = this.target.querySelector('.slideScreen');
     this.prev = this.target.querySelector('.slidePrev');
     this.next = this.target.querySelector('.slideNext');
@@ -421,15 +412,10 @@ export default class Slider {
    */
   hideLoader() {
     const bgPhotos = this.screen.querySelectorAll('.toBeMonitored');
-    const imgPath = this.imgPath;
     bgPhotos.forEach(bgPhoto => {
-      let url =
-        bgPhoto.style['background-image'] ||
-        window.getComputedStyle(bgPhoto, '')['background-image'];
-      if (imgPath) {
-        url = url.replace(/^url.+?img\/([^/]+?)"\)/, '$1').replace(/(.+?)$/, imgPath + '$1');
-      } else {
-        url = url.replace(/^url.+?img\/([^/]+?)"\)/, '$1').replace(/(.+?)$/, '$1');
+      let url = bgPhoto.style.getPropertyValue('background-image');
+      if (url !== '') {
+        url = url.replace(/^url\("(.+?)"\)/, '$1').replace(/(.+?)$/, '$1');
       }
       const img = document.createElement('img');
       img.src = url;
