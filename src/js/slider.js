@@ -168,9 +168,30 @@ export default class Slider {
   /**
    * スライダーメインコンテンツを作る
    * @param {obj} part
-   * @return {obj}
+   * @return {HTMLElement}
    */
-  createContentsElem(part) {
+  buildElems(part) {
+    if (!part.tag) {
+      throw new Error('タグが指定されていません');
+    }
+    let elem = this.createTag(part);
+    // スタイルを付与する
+    if (this.hasProperty(part, 'styles')) {
+      elem = this.addStyles(part.styles, elem);
+    }
+    // クラスを付与する
+    if (this.hasProperty(part, 'classes')) {
+      elem = this.addClasses(part.classes, elem);
+    }
+    return elem;
+  }
+
+  /**
+   * 指定されたタグを生成する
+   * @param {obj} part
+   * @return {HTMLElement}
+   */
+  createTag(part) {
     // tagで指定された要素を作る
     let elem = document.createElement(part.tag);
     switch (part.tag) {
@@ -210,26 +231,32 @@ export default class Slider {
         if (part.textContent) elem.insertAdjacentHTML('beforeend', part.textContent);
         break;
     }
-    // stylesで指定されたstyleを付ける
-    if (part.styles) {
-      Object.keys(part.styles).forEach(styleName => {
-        elem.style[styleName] = part.styles[styleName];
-        if (styleName == 'background-image') {
-          // background-imageの指定がある要素の場合、ローダーを設定する
-          elem.style['display'] = 'flex';
-          elem.style['justify-content'] = 'center';
-          elem.style['align-items'] = 'center';
-          elem.classList.add('toBeMonitored');
-          elem.insertAdjacentHTML('beforeend', '<div class="preLoading">Loading...</div>');
-        }
-      });
-    }
-    // classesで指定されたclassを付ける
-    if (part.classes) {
-      part.classes.forEach(child => {
-        elem.classList.add(child);
-      });
-    }
+    return elem;
+  }
+
+  /**
+   * 指定されたスタイルを付与する
+   * @param {obj} toAdd
+   * @param {HTMLFormElement} elem
+   * @return {HTMLFormElement}
+   */
+  addStyles(toAdd, elem) {
+    Object.keys(toAdd).forEach(styleName => {
+      elem.style.setProperty(styleName, toAdd[styleName], '');
+    });
+    return elem;
+  }
+
+  /**
+   * 指定されたclassを付与する
+   * @param {obj} classes
+   * @param {HTMLElement} elem
+   * @return {HTMLElement}
+   */
+  addClasses(classes, elem) {
+    classes.forEach(child => {
+      elem.classList.add(child);
+    });
     return elem;
   }
 
