@@ -29,7 +29,7 @@ export default class Main {
   setSliderProp(target) {
     const ms = 6000;
     const dispTileList = false;
-    const loopLimit = 20;
+    const loopLimit = 1;
     this.slider = new Slider(target, SlideContents, ms, loopLimit, dispTileList);
   }
 }
