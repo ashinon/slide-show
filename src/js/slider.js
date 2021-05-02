@@ -439,4 +439,14 @@ export default class Slider {
       };
     });
   }
+
+  /**
+   * プロパティの存在チェック
+   * @param {obj} obj
+   * @param {str} key
+   * @return {bool}
+   */
+  hasProperty(obj, key) {
+    return !!obj && Object.prototype.hasOwnProperty.call(obj, key);
+  }
 }
