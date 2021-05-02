@@ -3,7 +3,7 @@
     "contents": [
       {
         "tag": "h3",
-        "content": "タイ旅行のおもいで"
+        "textContent": "タイ旅行のおもいで"
       }
     ]
   },
@@ -11,7 +11,7 @@
     "contents": [
       {
         "tag": "h3",
-        "content": "いつの話か"
+        "textContent": "いつの話か"
       },
       {
         "tag": "div",
@@ -31,7 +31,7 @@
       {
         "tag": "div",
         "styles": { "margin": "auto" },
-        "content": "2019年11月に3泊4日で行ってきました。"
+        "textContent": "2019年11月に3泊4日で行ってきました。"
       }
     ]
   },
@@ -39,7 +39,7 @@
     "contents": [
       {
         "tag": "h3",
-        "content": "何をしたか"
+        "textContent": "何をしたか"
       },
       {
         "tag": "div",
@@ -57,7 +57,7 @@
     "contents": [
       {
         "tag": "ul",
-        "content": [
+        "list": [
           "いろんなタイ料理のレストランでご飯を食べたり",
           "お寺やパワースポットへ行ったり",
           "満員電車に揺られたり",
@@ -74,7 +74,7 @@
     "contents": [
       {
         "tag": "h3",
-        "content": "印象に残ったことは"
+        "textContent": "印象に残ったことは"
       },
       {
         "tag": "div",
@@ -92,7 +92,7 @@
     "contents": [
       {
         "tag": "ul",
-        "content": [
+        "list": [
           "お寺にシュールな仏像がたくさんあった",
           "仏像も建物も装飾が多くてきれいだった",
           "食べ物全般が美味しかった",
@@ -107,7 +107,7 @@
       {
         "tag": "p",
         "styles": { "text-align": "center" },
-        "content": "楽しかったのでまた行きたいです！"
+        "textContent": "楽しかったのでまた行きたいです！"
       },
       {
         "tag": "div",

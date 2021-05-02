@@ -9,22 +9,12 @@ export default class Slider {
    * @param {number} ms
    * @param {number} loopLimit
    * @param {boolean} dispTileList
-   * @param {string} imgPath 背景画像ありの要素を使用する場合にファイル名より前のパスを設定する
    */
-  constructor(
-    target,
-    slideContents,
-    ms = 4500,
-    loopLimit = 1,
-    dispTileList = false,
-    imgPath = 'dist/img/'
-  ) {
+  constructor(target, slideContents, ms = 4500, loopLimit = 1, dispTileList = false) {
     this.target = target;
-    this.slideContents = slideContents;
     this.playSpeed = ms;
     this.limit = loopLimit;
     this.dispTitleList = dispTileList;
-    this.imgPath = imgPath;
     this.screen = this.target.querySelector('.slideScreen');
     this.prev = this.target.querySelector('.slidePrev');
     this.next = this.target.querySelector('.slideNext');
@@ -35,33 +25,23 @@ export default class Slider {
     this.allSlideCount = 0; // スライドの総数
     this.playCount = 0; // オートプレイのカウント
     this.contents = [];
-    this.setSlider();
+    this.setSlider(slideContents);
   }
 
   /**
-   * 背景画像読み込み完了時に読み込み中アニメーションを非表示(個別画像用)
+   * スライダーを作る
+   * @param {obj} slideContents
    */
-  hideLoader() {
-    const bgPhotos = this.screen.querySelectorAll('.toBeMonitored');
-    const imgPath = this.imgPath;
-    bgPhotos.forEach(bgPhoto => {
-      let url =
-        bgPhoto.style['background-image'] ||
-        window.getComputedStyle(bgPhoto, '')['background-image'];
-      if (imgPath) {
-        url = url.replace(/^url.+?img\/([^/]+?)"\)/, '$1').replace(/(.+?)$/, imgPath + '$1');
-      } else {
-        url = url.replace(/^url.+?img\/([^/]+?)"\)/, '$1').replace(/(.+?)$/, '$1');
-      }
-      const img = document.createElement('img');
-      img.src = url;
-      img.width = img.height = 1;
-      bgPhoto.appendChild(img);
-      img.onload = () => {
-        bgPhoto.querySelector('.preLoading').style.display = 'none';
-        bgPhoto.removeChild(img);
-      };
-    });
+  setSlider(slideContents) {
+    this.maskSlideScreen();
+    this.convertToElem(slideContents);
+    this.hideScreenLoader(slideContents).catch(error => console.error(error.message));
+    this.setFirstContent(this.contents[0]);
+    this.setPrevsEvent();
+    this.setNextsEvent();
+    this.addEventTouch();
+    this.addEventScreenClick();
+    this.autoPlay();
   }
 
   /**
@@ -76,70 +56,10 @@ export default class Slider {
   }
 
   /**
-   * 全画像をキャッシュに保存し終わったタイミングで読み込み中表示を解除
-   */
-  async hideScreenLoader() {
-    await this.savedInCache(this.slideContents);
-    // キャッシュに保存し終わったらローダーを非表示にする
-    const target = this.screen.querySelector('.box-for-loading');
-    target.style.display = 'none';
-  }
-
-  /**
-   * 全ページの画像を全て読み込む
-   * @param {array} pages
-   */
-  savedInCache(pages) {
-    const urls = [];
-    const tmpContainer = document.createElement('div');
-    pages.forEach(page => {
-      page.contents.forEach(part => {
-        if (part.styles) {
-          if (Object.keys(part.styles).includes('background-image')) {
-            let url = part.styles['background-image'];
-            url = url.replace(/^url\(([^\\]+?.[a-z A-Z]+?)\)/, '$1');
-            urls.push(url);
-          }
-        }
-      });
-    });
-    urls.forEach((url, i) => {
-      const img = document.createElement('img');
-      img.src = url;
-      img.width = img.height = 1;
-      tmpContainer.appendChild(img);
-      window.addEventListener(
-        'load',
-        () => {
-          if (i == urls.length - 1) {
-            tmpContainer.remove();
-          }
-        },
-        { once: true }
-      );
-    });
-  }
-
-  /**
-   * スライダーを作る
-   */
-  setSlider() {
-    this.maskSlideScreen();
-    this.convertToElem(this.slideContents);
-    this.hideScreenLoader().catch(error => console.error(error.message));
-    this.setFirstContent(this.contents[0]);
-    this.setPrevsEvent();
-    this.setNextsEvent();
-    this.addEventTouch();
-    this.addEventScreenClick();
-    this.autoPlay();
-  }
-
-  /**
    * JsonデータからHTMLエレメントを生成する
-   * @param {array} pages
+   * @param {array} json
    */
-  convertToElem(pages) {
+  convertToElem(json) {
     // タイトルリスト部分のスタイルを設定する
     if (this.dispTitleList) {
       this.slideNaviList.classList.add('titleList');
@@ -147,24 +67,28 @@ export default class Slider {
       this.slideNaviList.classList.add('indicator');
     }
 
-    pages.forEach((page, i) => {
+    json.forEach((page, i) => {
       // リストタグを作る
       const list = this.createNaviElem(page, i);
 
       // コンテンツ表示部分を作る
-      const screen = document.createElement('div');
+      let screen = document.createElement('div');
       screen.setAttribute('id', this.contentIdPrefix + i);
       screen.classList.add('slide-contents');
       if (page.styles) {
-        Object.keys(page.styles).forEach(styleName => {
-          screen.style[styleName] = page.styles[styleName];
-        });
+        screen = this.addStyles(page.styles, screen);
       }
 
       // コンテンツを作る
       const contents = document.createElement('div');
       page.contents.forEach(part => {
-        let elem = this.createContentsElem(part);
+        let elem = this.buildElems(part);
+        // ローダーを付ける
+        if (elem.style.getPropertyValue('background-image')) {
+          // background-imageの指定がある場合はローダーを付ける
+          const loader = this.createLoader();
+          contents.appendChild(loader);
+        }
         contents.appendChild(elem);
       });
 
@@ -201,14 +125,36 @@ export default class Slider {
   /**
    * スライダーメインコンテンツを作る
    * @param {obj} part
-   * @return {obj}
+   * @return {HTMLElement}
    */
-  createContentsElem(part) {
+  buildElems(part) {
+    if (!part.tag) {
+      throw new Error('タグが指定されていません');
+    }
+    let elem = this.createTag(part);
+    // スタイルを付与する
+    if (this.hasProperty(part, 'styles')) {
+      elem = this.addStyles(part.styles, elem);
+    }
+    // クラスを付与する
+    if (this.hasProperty(part, 'classes')) {
+      elem = this.addClasses(part.classes, elem);
+    }
+    return elem;
+  }
+
+  /**
+   * 指定されたタグを生成する
+   * @param {obj} part
+   * @return {HTMLElement}
+   */
+  createTag(part) {
     // tagで指定された要素を作る
-    let elem = document.createElement(part.tag);
+    let elem;
     switch (part.tag) {
       case 'dl':
-        part.content.forEach(child => {
+        elem = document.createElement(part.tag);
+        part.list.forEach(child => {
           const div = document.createElement('div');
           const dt = document.createElement('dt');
           const dd = document.createElement('dd');
@@ -220,50 +166,120 @@ export default class Slider {
         });
         break;
       case 'ul':
-        part.content.forEach(child => {
+        elem = document.createElement(part.tag);
+        part.list.forEach(child => {
           const li = document.createElement('li');
           li.textContent = child;
           elem.appendChild(li);
         });
         break;
       case 'ol':
-        part.content.forEach(child => {
+        elem = document.createElement(part.tag);
+        part.list.forEach(child => {
           const li = document.createElement('li');
           li.textContent = child;
           elem.appendChild(li);
         });
         break;
       case 'img':
+        // 背景画像ありのdivにする
         elem = document.createElement('div');
-        elem.classList.add('has-bg-img');
-        if (!part.styles) part.styles = [];
-        part.styles['background-image'] = 'url(' + part.src + ')';
+        elem.style.setProperty('background-image', 'url(' + part.src + ')');
+        elem.style.setProperty('display', 'none', '');
+        // 背景画像用のクラス、ロード時の監視対象クラスを付与
+        elem.classList.add('has-bg-img', 'toBeMonitored');
+        elem.src = '';
+        break;
+      case 'div':
+        elem = document.createElement(part.tag);
+        // 背景画像ありの場合
+        if (this.hasProperty(part.styles, 'background-image')) {
+          // 背景画像用のクラス、ロード時の監視対象のクラスを付与
+          elem.classList.add('has-bg-img', 'toBeMonitored');
+          elem.style.setProperty('display', 'none', '');
+        }
+        // textContentを挿入
+        if (part.textContent) elem.insertAdjacentHTML('beforeend', part.textContent);
         break;
       default:
-        if (part.content) elem.insertAdjacentHTML('beforeend', part.content);
+        elem = document.createElement(part.tag);
+        if (part.textContent) elem.insertAdjacentHTML('beforeend', part.textContent);
         break;
     }
-    // stylesで指定されたstyleを付ける
-    if (part.styles) {
-      Object.keys(part.styles).forEach(styleName => {
-        elem.style[styleName] = part.styles[styleName];
-        if (styleName == 'background-image') {
-          // background-imageの指定がある要素の場合、ローダーを設定する
-          elem.style['display'] = 'flex';
-          elem.style['justify-content'] = 'center';
-          elem.style['align-items'] = 'center';
-          elem.classList.add('toBeMonitored');
-          elem.insertAdjacentHTML('beforeend', '<div class="preLoading">Loading...</div>');
+    return elem;
+  }
+
+  /**
+   * 指定されたスタイルを付与する
+   * @param {obj} toAdd
+   * @param {HTMLFormElement} elem
+   * @return {HTMLFormElement}
+   */
+  addStyles(toAdd, elem) {
+    Object.keys(toAdd).forEach(styleName => {
+      elem.style.setProperty(styleName, toAdd[styleName], '');
+    });
+    return elem;
+  }
+
+  /**
+   * 指定されたclassを付与する
+   * @param {obj} classes
+   * @param {HTMLElement} elem
+   * @return {HTMLElement}
+   */
+  addClasses(classes, elem) {
+    classes.forEach(child => {
+      elem.classList.add(child);
+    });
+    return elem;
+  }
+
+  /**
+   * 全画像をキャッシュに保存し終わったタイミングで読み込み中表示を解除
+   * @param {obj} slideContents
+   */
+  async hideScreenLoader(slideContents) {
+    let json = JSON.parse(JSON.stringify(slideContents));
+    await this.savedInCache(json);
+    // キャッシュに保存し終わったらローダーを非表示にする
+    const target = this.screen.querySelector('.box-for-loading');
+    target.style.display = 'none';
+  }
+
+  /**
+   * 全ページの画像を全て読み込む
+   * @param {array} json
+   */
+  savedInCache(json) {
+    const urls = [];
+    const tmpContainer = document.createElement('div');
+    json.forEach(page => {
+      page.contents.forEach(part => {
+        if (part.styles) {
+          if (Object.keys(part.styles).includes('background-image')) {
+            let url = part.styles['background-image'];
+            url = url.replace(/^url\(([^\\]+?.[a-z A-Z]+?)\)/, '$1');
+            urls.push(url);
+          }
         }
       });
-    }
-    // classesで指定されたclassを付ける
-    if (part.classes) {
-      part.classes.forEach(child => {
-        elem.classList.add(child);
-      });
-    }
-    return elem;
+    });
+    urls.forEach((url, i) => {
+      const img = document.createElement('img');
+      img.src = url;
+      img.width = img.height = 1;
+      tmpContainer.appendChild(img);
+      window.addEventListener(
+        'load',
+        () => {
+          if (i == urls.length - 1) {
+            tmpContainer.remove();
+          }
+        },
+        { once: true }
+      );
+    });
   }
 
   /**
@@ -272,6 +288,7 @@ export default class Slider {
    */
   setFirstContent(page) {
     this.screen.appendChild(page);
+    this.hideLoader();
   }
 
   /**
@@ -437,5 +454,52 @@ export default class Slider {
       },
       { passive: true }
     );
+  }
+
+  /**
+   * ローダーを付与する
+   * @return {HTMLElement}
+   */
+  createLoader() {
+    let elem = document.createElement('div');
+    elem.classList.add('preLoading');
+    elem.style.setProperty('display', 'block', '');
+    elem.insertAdjacentHTML('beforeend', 'Loading...');
+    return elem;
+  }
+
+  /**
+   * 背景画像読み込み完了時に読み込み中アニメーションを非表示(個別画像用)
+   */
+  hideLoader() {
+    const bgPhotos = this.screen.querySelectorAll('.toBeMonitored');
+    bgPhotos.forEach(bgPhoto => {
+      let url = bgPhoto.style.getPropertyValue('background-image');
+      if (url !== '') {
+        url = url.replace(/^url\("(.+?)"\)/, '$1').replace(/(.+?)$/, '$1');
+      }
+      const img = document.createElement('img');
+      img.src = url;
+      img.width = img.height = 1;
+      bgPhoto.appendChild(img);
+      img.onload = () => {
+        bgPhoto.removeChild(img);
+        // .preLoadingの要素
+        const nextElem = bgPhoto.previousElementSibling;
+        console.log('nextElem', nextElem, 'bgPhoto', bgPhoto);
+        nextElem.style.display = 'none';
+        bgPhoto.style.display = 'block';
+      };
+    });
+  }
+
+  /**
+   * プロパティの存在チェック
+   * @param {obj} obj
+   * @param {str} key
+   * @return {bool}
+   */
+  hasProperty(obj, key) {
+    return !!obj && Object.prototype.hasOwnProperty.call(obj, key);
   }
 }
