@@ -119,13 +119,11 @@ export default class Slider {
       const list = this.createNaviElem(page, i);
 
       // コンテンツ表示部分を作る
-      const screen = document.createElement('div');
+      let screen = document.createElement('div');
       screen.setAttribute('id', this.contentIdPrefix + i);
       screen.classList.add('slide-contents');
       if (page.styles) {
-        Object.keys(page.styles).forEach(styleName => {
-          screen.style[styleName] = page.styles[styleName];
-        });
+        screen = this.addStyles(page.styles, screen);
       }
 
       // コンテンツを作る
