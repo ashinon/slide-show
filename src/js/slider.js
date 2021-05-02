@@ -76,12 +76,12 @@ export default class Slider {
 
   /**
    * 全ページの画像を全て読み込む
-   * @param {array} pages
+   * @param {array} json
    */
-  savedInCache(pages) {
+  savedInCache(json) {
     const urls = [];
     const tmpContainer = document.createElement('div');
-    pages.forEach(page => {
+    json.forEach(page => {
       page.contents.forEach(part => {
         if (part.styles) {
           if (Object.keys(part.styles).includes('background-image')) {
@@ -111,9 +111,9 @@ export default class Slider {
 
   /**
    * JsonデータからHTMLエレメントを生成する
-   * @param {array} pages
+   * @param {array} json
    */
-  convertToElem(pages) {
+  convertToElem(json) {
     // タイトルリスト部分のスタイルを設定する
     if (this.dispTitleList) {
       this.slideNaviList.classList.add('titleList');
@@ -121,7 +121,7 @@ export default class Slider {
       this.slideNaviList.classList.add('indicator');
     }
 
-    pages.forEach((page, i) => {
+    json.forEach((page, i) => {
       // リストタグを作る
       const list = this.createNaviElem(page, i);
 
