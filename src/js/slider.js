@@ -131,7 +131,7 @@ export default class Slider {
       // コンテンツを作る
       const contents = document.createElement('div');
       page.contents.forEach(part => {
-        let elem = this.createContentsElem(part);
+        let elem = this.buildElems(part);
         contents.appendChild(elem);
       });
 
