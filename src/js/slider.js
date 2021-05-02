@@ -234,6 +234,18 @@ export default class Slider {
   }
 
   /**
+   * ローダーを付与する
+   * @return {HTMLElement}
+   */
+  createLoader() {
+    let elem = document.createElement('div');
+    elem.classList.add('preLoading');
+    elem.style.setProperty('display', 'block', '');
+    elem.insertAdjacentHTML('beforeend', 'Loading...');
+    return elem;
+  }
+
+  /**
    * JsonデータからHTMLエレメントを生成する
    * @param {HTMLElement} page
    */
