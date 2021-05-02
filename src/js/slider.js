@@ -56,53 +56,6 @@ export default class Slider {
   }
 
   /**
-   * 全画像をキャッシュに保存し終わったタイミングで読み込み中表示を解除
-   * @param {obj} slideContents
-   */
-  async hideScreenLoader(slideContents) {
-    let json = JSON.parse(JSON.stringify(slideContents));
-    await this.savedInCache(json);
-    // キャッシュに保存し終わったらローダーを非表示にする
-    const target = this.screen.querySelector('.box-for-loading');
-    target.style.display = 'none';
-  }
-
-  /**
-   * 全ページの画像を全て読み込む
-   * @param {array} json
-   */
-  savedInCache(json) {
-    const urls = [];
-    const tmpContainer = document.createElement('div');
-    json.forEach(page => {
-      page.contents.forEach(part => {
-        if (part.styles) {
-          if (Object.keys(part.styles).includes('background-image')) {
-            let url = part.styles['background-image'];
-            url = url.replace(/^url\(([^\\]+?.[a-z A-Z]+?)\)/, '$1');
-            urls.push(url);
-          }
-        }
-      });
-    });
-    urls.forEach((url, i) => {
-      const img = document.createElement('img');
-      img.src = url;
-      img.width = img.height = 1;
-      tmpContainer.appendChild(img);
-      window.addEventListener(
-        'load',
-        () => {
-          if (i == urls.length - 1) {
-            tmpContainer.remove();
-          }
-        },
-        { once: true }
-      );
-    });
-  }
-
-  /**
    * JsonデータからHTMLエレメントを生成する
    * @param {array} json
    */
@@ -283,15 +236,50 @@ export default class Slider {
   }
 
   /**
-   * ローダーを付与する
-   * @return {HTMLElement}
+   * 全画像をキャッシュに保存し終わったタイミングで読み込み中表示を解除
+   * @param {obj} slideContents
    */
-  createLoader() {
-    let elem = document.createElement('div');
-    elem.classList.add('preLoading');
-    elem.style.setProperty('display', 'block', '');
-    elem.insertAdjacentHTML('beforeend', 'Loading...');
-    return elem;
+  async hideScreenLoader(slideContents) {
+    let json = JSON.parse(JSON.stringify(slideContents));
+    await this.savedInCache(json);
+    // キャッシュに保存し終わったらローダーを非表示にする
+    const target = this.screen.querySelector('.box-for-loading');
+    target.style.display = 'none';
+  }
+
+  /**
+   * 全ページの画像を全て読み込む
+   * @param {array} json
+   */
+  savedInCache(json) {
+    const urls = [];
+    const tmpContainer = document.createElement('div');
+    json.forEach(page => {
+      page.contents.forEach(part => {
+        if (part.styles) {
+          if (Object.keys(part.styles).includes('background-image')) {
+            let url = part.styles['background-image'];
+            url = url.replace(/^url\(([^\\]+?.[a-z A-Z]+?)\)/, '$1');
+            urls.push(url);
+          }
+        }
+      });
+    });
+    urls.forEach((url, i) => {
+      const img = document.createElement('img');
+      img.src = url;
+      img.width = img.height = 1;
+      tmpContainer.appendChild(img);
+      window.addEventListener(
+        'load',
+        () => {
+          if (i == urls.length - 1) {
+            tmpContainer.remove();
+          }
+        },
+        { once: true }
+      );
+    });
   }
 
   /**
@@ -466,6 +454,18 @@ export default class Slider {
       },
       { passive: true }
     );
+  }
+
+  /**
+   * ローダーを付与する
+   * @return {HTMLElement}
+   */
+  createLoader() {
+    let elem = document.createElement('div');
+    elem.classList.add('preLoading');
+    elem.style.setProperty('display', 'block', '');
+    elem.insertAdjacentHTML('beforeend', 'Loading...');
+    return elem;
   }
 
   /**
