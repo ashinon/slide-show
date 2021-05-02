@@ -175,7 +175,7 @@ export default class Slider {
     let elem = document.createElement(part.tag);
     switch (part.tag) {
       case 'dl':
-        part.content.forEach(child => {
+        part.list.forEach(child => {
           const div = document.createElement('div');
           const dt = document.createElement('dt');
           const dd = document.createElement('dd');
@@ -187,14 +187,14 @@ export default class Slider {
         });
         break;
       case 'ul':
-        part.content.forEach(child => {
+        part.list.forEach(child => {
           const li = document.createElement('li');
           li.textContent = child;
           elem.appendChild(li);
         });
         break;
       case 'ol':
-        part.content.forEach(child => {
+        part.list.forEach(child => {
           const li = document.createElement('li');
           li.textContent = child;
           elem.appendChild(li);
@@ -207,7 +207,7 @@ export default class Slider {
         part.styles['background-image'] = 'url(' + part.src + ')';
         break;
       default:
-        if (part.content) elem.insertAdjacentHTML('beforeend', part.content);
+        if (part.textContent) elem.insertAdjacentHTML('beforeend', part.textContent);
         break;
     }
     // stylesで指定されたstyleを付ける
