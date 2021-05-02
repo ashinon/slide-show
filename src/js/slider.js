@@ -130,6 +130,12 @@ export default class Slider {
       const contents = document.createElement('div');
       page.contents.forEach(part => {
         let elem = this.buildElems(part);
+        // ローダーを付ける
+        if (elem.style.getPropertyValue('background-image')) {
+          // background-imageの指定がある場合はローダーを付ける
+          const loader = this.createLoader();
+          contents.appendChild(loader);
+        }
         contents.appendChild(elem);
       });
 
@@ -223,10 +229,24 @@ export default class Slider {
         });
         break;
       case 'img':
+        // 背景画像ありのdivにする
         elem = document.createElement('div');
-        elem.classList.add('has-bg-img');
-        if (!part.styles) part.styles = [];
-        part.styles['background-image'] = 'url(' + part.src + ')';
+        elem.style.setProperty('background-image', 'url(' + part.src + ')');
+        elem.style.setProperty('display', 'none', '');
+        // 背景画像用のクラス、ロード時の監視対象クラスを付与
+        elem.classList.add('has-bg-img', 'toBeMonitored');
+        elem.src = '';
+        break;
+      case 'div':
+        elem = document.createElement(part.tag);
+        // 背景画像ありの場合
+        if (this.hasProperty(part.styles, 'background-image')) {
+          // 背景画像用のクラス、ロード時の監視対象のクラスを付与
+          elem.classList.add('has-bg-img', 'toBeMonitored');
+          elem.style.setProperty('display', 'none', '');
+        }
+        // textContentを挿入
+        if (part.textContent) elem.insertAdjacentHTML('beforeend', part.textContent);
         break;
       default:
         elem = document.createElement(part.tag);
@@ -463,8 +483,12 @@ export default class Slider {
       img.width = img.height = 1;
       bgPhoto.appendChild(img);
       img.onload = () => {
-        bgPhoto.querySelector('.preLoading').style.display = 'none';
         bgPhoto.removeChild(img);
+        // .preLoadingの要素
+        const nextElem = bgPhoto.previousElementSibling;
+        console.log('nextElem', nextElem, 'bgPhoto', bgPhoto);
+        nextElem.style.display = 'none';
+        bgPhoto.style.display = 'block';
       };
     });
   }
