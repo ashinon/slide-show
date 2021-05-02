@@ -20,7 +20,6 @@ export default class Slider {
     imgPath = 'dist/img/'
   ) {
     this.target = target;
-    this.slideContents = slideContents;
     this.playSpeed = ms;
     this.limit = loopLimit;
     this.dispTitleList = dispTileList;
@@ -35,16 +34,17 @@ export default class Slider {
     this.allSlideCount = 0; // スライドの総数
     this.playCount = 0; // オートプレイのカウント
     this.contents = [];
-    this.setSlider();
+    this.setSlider(slideContents);
   }
 
   /**
    * スライダーを作る
+   * @param {obj} slideContents
    */
-  setSlider() {
+  setSlider(slideContents) {
     this.maskSlideScreen();
-    this.convertToElem(this.slideContents);
-    this.hideScreenLoader().catch(error => console.error(error.message));
+    this.convertToElem(slideContents);
+    this.hideScreenLoader(slideContents).catch(error => console.error(error.message));
     this.setFirstContent(this.contents[0]);
     this.setPrevsEvent();
     this.setNextsEvent();
@@ -66,9 +66,11 @@ export default class Slider {
 
   /**
    * 全画像をキャッシュに保存し終わったタイミングで読み込み中表示を解除
+   * @param {obj} slideContents
    */
-  async hideScreenLoader() {
-    await this.savedInCache(this.slideContents);
+  async hideScreenLoader(slideContents) {
+    let json = JSON.parse(JSON.stringify(slideContents));
+    await this.savedInCache(json);
     // キャッシュに保存し終わったらローダーを非表示にする
     const target = this.screen.querySelector('.box-for-loading');
     target.style.display = 'none';
