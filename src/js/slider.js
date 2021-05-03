@@ -491,7 +491,7 @@ export default class Slider {
         const nextElem = bgPhoto.previousElementSibling;
         console.log('nextElem', nextElem, 'bgPhoto', bgPhoto);
         nextElem.style.display = 'none';
-        bgPhoto.style.display = 'block';
+        bgPhoto.style.display = '';
       };
     });
   }
