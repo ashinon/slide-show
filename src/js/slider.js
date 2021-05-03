@@ -487,9 +487,8 @@ export default class Slider {
       bgPhoto.appendChild(img);
       img.onload = () => {
         bgPhoto.removeChild(img);
-        // .preLoadingの要素
+        // .preLoadingで隠れていた要素
         const nextElem = bgPhoto.previousElementSibling;
-        console.log('nextElem', nextElem, 'bgPhoto', bgPhoto);
         nextElem.style.display = 'none';
         bgPhoto.style.display = '';
       };
