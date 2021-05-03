@@ -78,6 +78,9 @@ export default class Slider {
       if (page.styles) {
         screen = this.addStyles(page.styles, screen);
       }
+      if (page.classes) {
+        screen = this.addClasses(page.classes, screen);
+      }
 
       // コンテンツを作る
       const contents = document.createElement('div');
