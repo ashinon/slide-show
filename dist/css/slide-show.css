@@ -274,8 +274,7 @@
   -webkit-transform: translateZ(0);
   -ms-transform: translateZ(0);
   transform: translateZ(0);
-  -webkit-animation: load 1.1s infinite linear;
-  animation: load 1.1s infinite linear;
+  animation: load 1.5s infinite linear;
   overflow: hidden;
   z-index: 999;
 }
@@ -295,10 +294,7 @@
   border-right: 1.1em solid rgba(176, 196, 222, 0.2);
   border-bottom: 1.1em solid rgba(176, 196, 222, 0.2);
   border-left: 1.1em solid rgba(176, 179, 222, 0.7);
-  -webkit-transform: translateZ(0);
-  -ms-transform: translateZ(0);
   transform: translateZ(0);
-  -webkit-animation: load 1.1s infinite linear;
   animation: load 1.1s infinite linear;
   overflow: hidden;
 }
@@ -306,23 +302,11 @@
 /****************************************
   回るアニメーション(preloaderで使う)
 ****************************************/
-@-webkit-keyframes load {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
 @keyframes load {
   0% {
-    -webkit-transform: rotate(0deg);
     transform: rotate(0deg);
   }
   100% {
-    -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
 }
