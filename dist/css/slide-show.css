@@ -93,38 +93,43 @@
 
 .slide-contents > div {
   width: 100%;
+  min-height: 350px;
+  max-height: 400px;
   margin: auto;
   display: flex;
+  flex-direction: column;
   align-content: center;
   align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  justify-content: space-around;
   overflow: hidden;
 }
 
 .slide-contents > div div:not(.preLoading) {
   margin: auto;
   display: flex;
-  align-items: center;
+  align-content: center;
 }
 
-.slide-contents p {
-  width: 90%;
-  margin: 0 auto;
+}
+
+.slide-contents p,
+.slide-contents span,
+.slide-contents ul,
+.slide-contents ol,
+.slide-contents dl,
+.slide-contents dl div {
+  width: 100%;
   text-align: left;
+}
+
+.slide-contents ul,
+.slide-contents ol {
+  width: calc(100% - 1rem);
+  margin-left: 1rem;
 }
 
 /* リストタグ */
-.slide-contents dl,
-.slide-contents ul,
-.slide-contents ol {
-  width: auto;
-  max-width: 90%;
-}
-
 .slide-contents ul {
-  margin: auto;
-  text-align: left;
   display: flex;
   align-content: center;
   justify-content: flex-start;
@@ -137,7 +142,6 @@
 }
 
 .slide-contents dl div {
-  width: 100%;
   display: flex;
   flex-flow: row wrap;
 }
