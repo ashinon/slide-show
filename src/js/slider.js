@@ -25,17 +25,18 @@ export default class Slider {
     this.allSlideCount = 0; // スライドの総数
     this.playCount = 0; // オートプレイのカウント
     this.contents = [];
-    this.setSlider(slideContents);
+    this.setSlider(slideContents).catch(error => console.error(error.message));
   }
 
   /**
    * スライダーを作る
    * @param {obj} slideContents
    */
-  setSlider(slideContents) {
+  async setSlider(slideContents) {
     this.maskSlideScreen();
-    this.convertToElem(slideContents);
-    this.hideScreenLoader(slideContents).catch(error => console.error(error.message));
+    await this.onceLoadImg(slideContents);
+    await this.convertToElem(slideContents);
+    this.hideScreenLoader(slideContents);
     this.setFirstContent(this.contents[0]);
     this.setPrevsEvent();
     this.setNextsEvent();
@@ -226,15 +227,10 @@ export default class Slider {
     return elem;
   }
 
-
   /**
-   * 全画像をキャッシュに保存し終わったタイミングで読み込み中表示を解除
-   * @param {obj} slideContents
+   * 読み込み中表示を解除
    */
-  async hideScreenLoader(slideContents) {
-    let json = JSON.parse(JSON.stringify(slideContents));
-    await this.savedInCache(json);
-    // キャッシュに保存し終わったらローダーを非表示にする
+  hideScreenLoader() {
     const target = this.screen.querySelector('.box-for-loading');
     target.style.display = 'none';
   }
