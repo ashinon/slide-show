@@ -240,12 +240,11 @@ export default class Slider {
   }
 
   /**
-   * 全ページの画像を全て読み込む
-   * @param {array} json
+   * 全ページの画像を全て一度読み込む
+   * @param {json} json
    */
-  savedInCache(json) {
-    const urls = [];
-    const tmpContainer = document.createElement('div');
+  onceLoadImg(json) {
+   */
     json.forEach(page => {
       page.contents.forEach(part => {
         if (part.styles) {
