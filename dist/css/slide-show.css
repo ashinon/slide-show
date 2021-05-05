@@ -193,12 +193,11 @@
   .slide-contents li {
     margin: 0 0 0.75em 1em;
   }
-
-  .slider i.fas {
-    display: none;
-  }
 }
 
+/****************************************
+  インジゲーター
+****************************************/
 .slideNavi ul {
   margin: 0;
   padding: 0;
@@ -271,8 +270,6 @@
   border-right: 2em solid rgba(176, 196, 222, 0.2);
   border-bottom: 2em solid rgba(176, 196, 222, 0.2);
   border-left: 2em solid rgba(176, 179, 222, 0.7);
-  -webkit-transform: translateZ(0);
-  -ms-transform: translateZ(0);
   transform: translateZ(0);
   animation: load 1.5s infinite linear;
   overflow: hidden;
