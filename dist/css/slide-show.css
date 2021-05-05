@@ -28,9 +28,6 @@
   max-height: 700px;
   margin: auto 0;
   padding: 30px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   opacity: 1;
   background-image: radial-gradient(
     rgba(255, 255, 255, 1) 65%,
@@ -41,60 +38,141 @@
   text-align: center;
 }
 
-.slider i {
-  width: calc(5% + 25px);
+/****************************************
+  左右の矢印アイコン
+****************************************/
+.slidePrev,
+.slideNext {
+  width: calc(2% + 25px);
   min-width: 50px;
-  font-size: 100px;
   position: relative;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.slider i::before,
-.slider i::after {
-  color: rgba(255, 255, 255, 0.9);
-  text-shadow: 0px 3px 5px rgba(60, 60, 60, 0.2);
+.slidePrev:before,
+.slideNext:before {
+  height: 0;
+  width: 0;
+  display: block;
+  content: '';
   position: absolute;
-  top: calc(50% - 0.5em);
+  top: calc(50% - 20px);
+  border: 40px transparent solid;
 }
 
-.slider i.slidePrev::before {
+.slidePrev:before {
   left: 0;
+  border-left-width: 0;
+  border-right-color: rgba(255, 255, 255, 0.7);
 }
 
-.slider i.slideNext::before {
+.slideNext:before {
   right: 0;
+  border-right-width: 0;
+  border-left-color: rgba(255, 255, 255, 0.7);
 }
 
+/****************************************
+  スライド内容表示エリア
+****************************************/
 .slide-contents {
   width: 100%;
   max-width: 900px;
   height: auto;
   min-height: 350px;
+  max-height: 400px;
   margin: 0 auto;
   padding: 0;
   text-align: center;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  overflow: hidden;
 }
 
-.slide-contents .has-bg-img {
-  height: 300px;
-  transform-origin: center 70%;
+/* iPadまで */
+@media screen and (min-width: 601px) and (max-width: 767px) {
+  .slide-contents {
+    width: 100%;
+    min-height: 320px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .slide-contents {
+    width: 100%;
+    min-height: 280px;
+    margin: auto;
+    padding: 10px;
+  }
+}
+
+.slide-contents > div {
+  width: 100%;
+  min-height: 350px;
+  max-height: 400px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  justify-content: space-around;
+  overflow: hidden;
+}
+
+.slide-contents > div div:not(.preLoading) {
+  margin: auto;
+  display: flex;
+  align-content: center;
+}
+
+/* 背景画像ありのdiv、imgを囲うdiv */
+.img-container {
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+/* background-imgが指定されたdivのクラス */
+.has-bg-img {
+  width: 100%;
+  min-height: 350px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
+  overflow: visible;
 }
 
-.slide-contents ul {
-  width: auto;
-  max-width: 90%;
-  margin: 0.75em auto 0 auto;
+.slide-contents p,
+.slide-contents span,
+.slide-contents ul,
+.slide-contents ol,
+.slide-contents dl,
+.slide-contents dl div {
+  width: 100%;
   text-align: left;
+}
+
+.slide-contents ul,
+.slide-contents ol {
+  width: calc(100% - 1rem);
+  margin-left: 1rem;
+}
+
+/* リストタグ */
+.slide-contents ul {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  align-content: center;
   justify-content: flex-start;
+  flex-wrap: wrap;
 }
 
 .slide-contents li {
@@ -102,45 +180,17 @@
   margin: 0 1.75em 0.75em 0;
 }
 
-.slide-contents p {
-  width: 90%;
-  margin: 0 auto;
-  text-align: left;
-}
-
-.slideScreen dl,
-.slideScreen ul,
-.slideScreen ol {
-  margin-top: 25px;
-}
-
-.slideScreen dl div {
-  width: 100%;
+.slide-contents dl div {
   display: flex;
   flex-flow: row wrap;
 }
 
-.slideScreen dl dt::after {
+.slide-contents dl dt::after {
   content: '：';
   margin-right: 0.5em;
 }
 
-/* iPadまで */
-@media screen and (min-width: 601px) and (max-width: 767px) {
-  .slideScreen {
-    width: 100%;
-    min-height: 320px;
-  }
-}
-
 @media screen and (max-width: 600px) {
-  .slideScreen {
-    width: 100%;
-    min-height: 280px;
-    margin: auto;
-    padding: 10px;
-  }
-
   .slide-contents ul {
     flex-direction: column;
   }
@@ -148,12 +198,11 @@
   .slide-contents li {
     margin: 0 0 0.75em 1em;
   }
-
-  .slider i.fas {
-    display: none;
-  }
 }
 
+/****************************************
+  インジゲーター
+****************************************/
 .slideNavi ul {
   margin: 0;
   padding: 0;
@@ -197,17 +246,10 @@
   background-color: #999;
 }
 
-/* background-imgが指定されたdivのクラス */
-.has-bg-img {
-  display: flex;
-  align-content: center;
-  justify-content: center;
-}
-
 /****************************************
   preloader(全体)
 ****************************************/
-.box-for-loading {
+.slide-contents .box-for-loading {
   width: 100%;
   max-width: 900px;
   height: auto;
@@ -220,7 +262,7 @@
   z-index: 1;
 }
 
-.slideshow-loading-all {
+.slide-contents .slideshow-loading-all {
   content: '';
   border-radius: 50%;
   width: 20em;
@@ -233,11 +275,8 @@
   border-right: 2em solid rgba(176, 196, 222, 0.2);
   border-bottom: 2em solid rgba(176, 196, 222, 0.2);
   border-left: 2em solid rgba(176, 179, 222, 0.7);
-  -webkit-transform: translateZ(0);
-  -ms-transform: translateZ(0);
   transform: translateZ(0);
-  -webkit-animation: load 1.1s infinite linear;
-  animation: load 1.1s infinite linear;
+  animation: load 1.5s infinite linear;
   overflow: hidden;
   z-index: 999;
 }
@@ -257,10 +296,7 @@
   border-right: 1.1em solid rgba(176, 196, 222, 0.2);
   border-bottom: 1.1em solid rgba(176, 196, 222, 0.2);
   border-left: 1.1em solid rgba(176, 179, 222, 0.7);
-  -webkit-transform: translateZ(0);
-  -ms-transform: translateZ(0);
   transform: translateZ(0);
-  -webkit-animation: load 1.1s infinite linear;
   animation: load 1.1s infinite linear;
   overflow: hidden;
 }
@@ -268,23 +304,11 @@
 /****************************************
   回るアニメーション(preloaderで使う)
 ****************************************/
-@-webkit-keyframes load {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
 @keyframes load {
   0% {
-    -webkit-transform: rotate(0deg);
     transform: rotate(0deg);
   }
   100% {
-    -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
 }
