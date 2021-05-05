@@ -244,33 +244,40 @@ export default class Slider {
    * @param {json} json
    */
   onceLoadImg(json) {
-   */
-    json.forEach(page => {
-      page.contents.forEach(part => {
-        if (part.styles) {
-          if (Object.keys(part.styles).includes('background-image')) {
-            let url = part.styles['background-image'];
-            url = url.replace(/^url\(([^\\]+?.[a-z A-Z]+?)\)/, '$1');
-            urls.push(url);
-          }
-        }
-      });
-    });
-    urls.forEach((url, i) => {
+    const pathList = this.getImgPathList(JSON.parse(JSON.stringify(json)));
+    pathList.forEach(path => {
       const img = document.createElement('img');
-      img.src = url;
-      img.width = img.height = 1;
-      tmpContainer.appendChild(img);
-      window.addEventListener(
+      img.src = path;
+      img.addEventListener(
         'load',
         () => {
-          if (i == urls.length - 1) {
-            tmpContainer.remove();
-          }
+          img.remove();
         },
         { once: true }
       );
     });
+  }
+
+  /**
+   * json内の画像パスを全て取得する
+   * @param {json} json
+   * @return {array}
+   */
+  getImgPathList(json) {
+    const pathList = [];
+    json.forEach(page => {
+      page.contents.forEach(part => {
+        if (part.styles) {
+          if (Object.keys(part.styles).includes('background-image')) {
+            let path = part.styles['background-image'];
+            path = path.replace(/^url\(([^\\]+?.[a-z A-Z]+?)\)/, '$1');
+            pathList.push(path);
+            this.setImgData(path);
+          }
+        }
+      });
+    });
+    return pathList;
   }
 
   /**
