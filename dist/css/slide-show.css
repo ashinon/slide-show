@@ -172,14 +172,14 @@
 
 /* iPadまで */
 @media screen and (min-width: 601px) and (max-width: 767px) {
-  .slideScreen {
+  .slide-contents {
     width: 100%;
     min-height: 320px;
   }
 }
 
 @media screen and (max-width: 600px) {
-  .slideScreen {
+  .slide-contents {
     width: 100%;
     min-height: 280px;
     margin: auto;
