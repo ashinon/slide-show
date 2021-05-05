@@ -90,11 +90,17 @@ export default class Slider {
       const contents = document.createElement('div');
       page.contents.forEach(part => {
         let elem = this.buildElems(part);
-        // ローダーを付ける
-        if (elem.style.getPropertyValue('background-image')) {
-          // background-imageの指定がある場合はローダーを付ける
+
+        // 画像表示用の要素の場合
+        if (elem.classList.contains('has-bg-img')) {
+          // コンテナを作る
+          const imgContainer = document.createElement('div');
+          imgContainer.classList.add('img-container');
+          // ローダーを付ける
           const loader = this.createLoader();
-          contents.appendChild(loader);
+          imgContainer.appendChild(loader);
+          imgContainer.appendChild(elem);
+          elem = imgContainer;
         }
         contents.appendChild(elem);
       });
