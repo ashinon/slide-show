@@ -24,7 +24,7 @@ export default class Slider {
     this.current = 0; // 現在のスライド
     this.allSlideCount = 0; // スライドの総数
     this.playCount = 0; // オートプレイのカウント
-    this.contents = [];
+    this.contents = []; // jsonからhtmlに変換後のslideContents
     this.setSlider(slideContents).catch(error => console.error(error.message));
   }
 
