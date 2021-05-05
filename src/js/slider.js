@@ -473,9 +473,8 @@ export default class Slider {
       const img = document.createElement('img');
       img.src = url;
       img.width = img.height = 1;
-      bgPhoto.appendChild(img);
       img.onload = () => {
-        bgPhoto.removeChild(img);
+        img.remove();
         // .preLoadingで隠れていた要素
         const nextElem = bgPhoto.previousElementSibling;
         nextElem.style.display = 'none';
