@@ -97,7 +97,6 @@ export default class Slider {
             let path = part.styles['background-image'];
             path = path.replace(/^url\(([^\\]+?.[a-z A-Z]+?)\)/, '$1');
             pathList.push(path);
-            this.setImgData(path);
           }
         }
       });
