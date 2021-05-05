@@ -28,9 +28,6 @@
   max-height: 700px;
   margin: auto 0;
   padding: 30px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   opacity: 1;
   background-image: radial-gradient(
     rgba(255, 255, 255, 1) 65%,
@@ -78,41 +75,37 @@
   border-left-color: rgba(255, 255, 255, 0.7);
 }
 
+/****************************************
+  スライド内容表示エリア
+****************************************/
 .slide-contents {
   width: 100%;
   max-width: 900px;
   height: auto;
   min-height: 350px;
+  max-height: 400px;
   margin: 0 auto;
   padding: 0;
   text-align: center;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  overflow: hidden;
 }
 
-.slide-contents .has-bg-img {
-  height: 300px;
-  transform-origin: center 70%;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center center;
-}
-
-.slide-contents ul {
-  width: auto;
-  max-width: 90%;
-  margin: 0.75em auto 0 auto;
-  text-align: left;
+.slide-contents > div {
+  width: 100%;
+  margin: auto;
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-start;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  overflow: hidden;
 }
 
-.slide-contents li {
-  min-width: calc(50% - 2.5em);
-  margin: 0 1.75em 0.75em 0;
+.slide-contents > div div:not(.preLoading) {
+  margin: auto;
+  display: flex;
+  align-items: center;
 }
 
 .slide-contents p {
@@ -121,21 +114,60 @@
   text-align: left;
 }
 
-.slideScreen dl,
-.slideScreen ul,
-.slideScreen ol {
-  margin-top: 25px;
+/* リストタグ */
+.slide-contents dl,
+.slide-contents ul,
+.slide-contents ol {
+  width: auto;
+  max-width: 90%;
 }
 
-.slideScreen dl div {
+.slide-contents ul {
+  margin: auto;
+  text-align: left;
+  display: flex;
+  align-content: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.slide-contents li {
+  min-width: calc(50% - 2.5em);
+  margin: 0 1.75em 0.75em 0;
+}
+
+.slide-contents dl div {
   width: 100%;
   display: flex;
   flex-flow: row wrap;
 }
 
-.slideScreen dl dt::after {
+.slide-contents dl dt::after {
   content: '：';
   margin-right: 0.5em;
+}
+
+/* background-imgが指定されたdivのクラス */
+.has-bg-img {
+  width: 100%;
+  height: auto;
+  min-height: 350px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  overflow: visible;
+}
+
+/* 背景画像ありのdiv、imgを囲うdiv */
+.img-container {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
 }
 
 /* iPadまで */
@@ -210,17 +242,10 @@
   background-color: #999;
 }
 
-/* background-imgが指定されたdivのクラス */
-.has-bg-img {
-  display: flex;
-  align-content: center;
-  justify-content: center;
-}
-
 /****************************************
   preloader(全体)
 ****************************************/
-.box-for-loading {
+.slide-contents .box-for-loading {
   width: 100%;
   max-width: 900px;
   height: auto;
@@ -233,7 +258,7 @@
   z-index: 1;
 }
 
-.slideshow-loading-all {
+.slide-contents .slideshow-loading-all {
   content: '';
   border-radius: 50%;
   width: 20em;
