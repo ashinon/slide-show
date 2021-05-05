@@ -76,10 +76,14 @@ export default class Slider {
       screen.setAttribute('id', this.contentIdPrefix + i);
       screen.classList.add('slide-contents');
       if (page.styles) {
-        screen = this.addStyles(page.styles, screen);
+        Object.keys(page.styles).forEach(styleName => {
+          screen.style.setProperty(styleName, page.styles[styleName], '');
+        });
       }
       if (page.classes) {
-        screen = this.addClasses(page.classes, screen);
+        page.classes.forEach(child => {
+          screen.classList.add(child);
+        });
       }
 
       // コンテンツを作る
@@ -137,11 +141,15 @@ export default class Slider {
     let elem = this.createTag(part);
     // スタイルを付与する
     if (this.hasProperty(part, 'styles')) {
-      elem = this.addStyles(part.styles, elem);
+      Object.keys(part.styles).forEach(styleName => {
+        elem.style.setProperty(styleName, part.styles[styleName], '');
+      });
     }
     // クラスを付与する
     if (this.hasProperty(part, 'classes')) {
-      elem = this.addClasses(part.classes, elem);
+      part.classes.forEach(child => {
+        elem.classList.add(child);
+      });
     }
     return elem;
   }
@@ -212,31 +220,6 @@ export default class Slider {
     return elem;
   }
 
-  /**
-   * 指定されたスタイルを付与する
-   * @param {obj} toAdd
-   * @param {HTMLFormElement} elem
-   * @return {HTMLFormElement}
-   */
-  addStyles(toAdd, elem) {
-    Object.keys(toAdd).forEach(styleName => {
-      elem.style.setProperty(styleName, toAdd[styleName], '');
-    });
-    return elem;
-  }
-
-  /**
-   * 指定されたclassを付与する
-   * @param {obj} classes
-   * @param {HTMLElement} elem
-   * @return {HTMLElement}
-   */
-  addClasses(classes, elem) {
-    classes.forEach(child => {
-      elem.classList.add(child);
-    });
-    return elem;
-  }
 
   /**
    * 全画像をキャッシュに保存し終わったタイミングで読み込み中表示を解除
