@@ -38,41 +38,6 @@
   text-align: center;
 }
 
-/****************************************
-  左右の矢印アイコン
-****************************************/
-.slidePrev,
-.slideNext {
-  width: calc(2% + 25px);
-  min-width: 50px;
-  position: relative;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.slidePrev:before,
-.slideNext:before {
-  height: 0;
-  width: 0;
-  display: block;
-  content: '';
-  position: absolute;
-  top: calc(50% - 20px);
-  border: 40px transparent solid;
-}
-
-.slidePrev:before {
-  left: 0;
-  border-left-width: 0;
-  border-right-color: rgba(255, 255, 255, 0.7);
-}
-
-.slideNext:before {
-  right: 0;
-  border-right-width: 0;
-  border-left-color: rgba(255, 255, 255, 0.7);
 }
 
 /****************************************
@@ -244,6 +209,52 @@
 
 .slideNavi .indicator li.selected {
   background-color: #999;
+}
+
+/****************************************
+  左右の矢印アイコン
+****************************************/
+.slidePrev,
+.slideNext {
+  width: calc(2% + 25px);
+  min-width: 50px;
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slidePrev:before,
+.slideNext:before {
+  height: 0;
+  width: 0;
+  display: block;
+  content: '';
+  position: absolute;
+  top: calc(50% - 20px);
+  border: 40px transparent solid;
+}
+
+.slidePrev:before {
+  left: 0;
+  border-left-width: 0;
+  border-right-color: rgba(255, 255, 255, 0.7);
+}
+
+.slideNext:before {
+  right: 0;
+  border-right-width: 0;
+  border-left-color: rgba(255, 255, 255, 0.7);
+}
+
+@media screen and (max-width: 600px) {
+  .slidePrev,
+  .slideNext,
+  .slidePrev:before,
+  .slideNext:before {
+    display: none;
+  }
 }
 
 /****************************************
