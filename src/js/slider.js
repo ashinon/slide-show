@@ -52,7 +52,7 @@ export default class Slider {
   maskSlideScreen() {
     this.screen.insertAdjacentHTML(
       'beforeend',
-      '<div class="slide-contents box-for-loading"><div class="slideshow-loading-all">Loading...</div></div>'
+      '<div class="slide-contents-box box-for-loading"><div class="slideshow-loading-all">Loading...</div></div>'
     );
   }
 
@@ -120,23 +120,26 @@ export default class Slider {
       // リストタグを作る
       const list = this.createNaviElem(page, i);
 
-      // コンテンツ表示部分を作る
-      let screen = document.createElement('div');
-      screen.setAttribute('id', this.contentIdPrefix + i);
-      screen.classList.add('slide-contents');
+      // コンテンツ表示部分(外側)を作る
+      let contentsBox = document.createElement('div');
+      contentsBox.setAttribute('id', this.contentIdPrefix + i);
+      contentsBox.classList.add('slide-contents-box');
+
+      // コンテンツ表示部分(内側)を作る
+      const contents = document.createElement('div');
+      contents.classList.add('slide-contents');
       if (page.styles) {
         Object.keys(page.styles).forEach(styleName => {
-          screen.style.setProperty(styleName, page.styles[styleName], '');
+          contents.style.setProperty(styleName, page.styles[styleName], '');
         });
       }
       if (page.classes) {
         page.classes.forEach(child => {
-          screen.classList.add(child);
+          contents.classList.add(child);
         });
       }
 
       // コンテンツを作る
-      const contents = document.createElement('div');
       page.contents.forEach(part => {
         let elem = this.buildElems(part);
 
@@ -155,8 +158,8 @@ export default class Slider {
       });
 
       // コンテンツ表示部分に格納する
-      screen.appendChild(contents);
-      this.contents.push(screen);
+      contentsBox.appendChild(contents);
+      this.contents.push(contentsBox);
 
       // タイトルリストのクリックイベントを設定する
       this.setListClickEvent(list, i);

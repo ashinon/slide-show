@@ -24,8 +24,8 @@
 
 .slideScreen {
   width: 80%;
-  min-height: 320px;
-  max-height: 700px;
+  min-height: 350px;
+  max-height: 460px;
   margin: auto 0;
   padding: 30px;
   opacity: 1;
@@ -38,51 +38,22 @@
   text-align: center;
 }
 
-/****************************************
-  左右の矢印アイコン
-****************************************/
-.slidePrev,
-.slideNext {
-  width: calc(2% + 25px);
-  min-width: 50px;
-  position: relative;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.slidePrev:before,
-.slideNext:before {
-  height: 0;
-  width: 0;
-  display: block;
-  content: '';
-  position: absolute;
-  top: calc(50% - 20px);
-  border: 40px transparent solid;
-}
-
-.slidePrev:before {
-  left: 0;
-  border-left-width: 0;
-  border-right-color: rgba(255, 255, 255, 0.7);
-}
-
-.slideNext:before {
-  right: 0;
-  border-right-width: 0;
-  border-left-color: rgba(255, 255, 255, 0.7);
+@media screen and (max-width: 600px) {
+  .slideScreen {
+    width: 98%;
+    margin: auto;
+    padding: 10px;
+  }
 }
 
 /****************************************
   スライド内容表示エリア
 ****************************************/
-.slide-contents {
+.slide-contents-box {
   width: 100%;
   max-width: 900px;
   height: auto;
-  min-height: 350px;
+  min-height: 300px;
   max-height: 400px;
   margin: 0 auto;
   padding: 0;
@@ -93,24 +64,23 @@
 
 /* iPadまで */
 @media screen and (min-width: 601px) and (max-width: 767px) {
-  .slide-contents {
+  .slide-contents-box {
     width: 100%;
     min-height: 320px;
   }
 }
 
 @media screen and (max-width: 600px) {
-  .slide-contents {
+  .slide-contents-box {
     width: 100%;
-    min-height: 280px;
+    max-height: 420px;
     margin: auto;
-    padding: 10px;
   }
 }
 
-.slide-contents > div {
+.slide-contents {
   width: 100%;
-  min-height: 350px;
+  min-height: 300px;
   max-height: 400px;
   margin: auto;
   display: flex;
@@ -118,10 +88,9 @@
   align-content: center;
   align-items: center;
   justify-content: space-around;
-  overflow: hidden;
 }
 
-.slide-contents > div div:not(.preLoading) {
+.slide-contents div:not(.preLoading) {
   margin: auto;
   display: flex;
   align-content: center;
@@ -131,7 +100,8 @@
 .img-container {
   width: 100%;
   height: auto;
-  max-height: 100%;
+  min-height: 350px;
+  max-height: 400px;
   margin: 0;
   padding: 0;
   overflow: hidden;
@@ -151,6 +121,17 @@
   overflow: visible;
 }
 
+@media screen and (max-width: 600px) {
+  .img-container {
+    min-height: 200px;
+    max-height: 300px;
+  }
+  .has-bg-img {
+    min-height: 200px;
+    background-position: bottom 0px center;
+  }
+}
+
 .slide-contents p,
 .slide-contents span,
 .slide-contents ul,
@@ -158,6 +139,7 @@
 .slide-contents dl,
 .slide-contents dl div {
   width: 100%;
+  margin-bottom: 10px;
   text-align: left;
 }
 
@@ -247,6 +229,52 @@
 }
 
 /****************************************
+  左右の矢印アイコン
+****************************************/
+.slidePrev,
+.slideNext {
+  width: calc(2% + 25px);
+  min-width: 50px;
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slidePrev:before,
+.slideNext:before {
+  height: 0;
+  width: 0;
+  display: block;
+  content: '';
+  position: absolute;
+  top: calc(50% - 20px);
+  border: 40px transparent solid;
+}
+
+.slidePrev:before {
+  left: 0;
+  border-left-width: 0;
+  border-right-color: rgba(255, 255, 255, 0.7);
+}
+
+.slideNext:before {
+  right: 0;
+  border-right-width: 0;
+  border-left-color: rgba(255, 255, 255, 0.7);
+}
+
+@media screen and (max-width: 600px) {
+  .slidePrev,
+  .slideNext,
+  .slidePrev:before,
+  .slideNext:before {
+    display: none;
+  }
+}
+
+/****************************************
   preloader(全体)
 ****************************************/
 .slide-contents .box-for-loading {
@@ -285,13 +313,13 @@
   preloader(個別)
 ****************************************/
 .preLoading {
-  border-radius: 50%;
   width: 10em;
   height: 10em;
-  margin: 0;
-  font-size: 10px;
+  margin: auto;
   position: relative;
+  font-size: 10px;
   text-indent: -9999em;
+  border-radius: 50%;
   border-top: 1.1em solid rgba(176, 196, 222, 0.2);
   border-right: 1.1em solid rgba(176, 196, 222, 0.2);
   border-bottom: 1.1em solid rgba(176, 196, 222, 0.2);
