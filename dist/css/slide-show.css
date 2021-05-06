@@ -24,8 +24,8 @@
 
 .slideScreen {
   width: 80%;
-  min-height: 320px;
-  max-height: 700px;
+  min-height: 350px;
+  max-height: 460px;
   margin: auto 0;
   padding: 30px;
   opacity: 1;
@@ -38,6 +38,12 @@
   text-align: center;
 }
 
+@media screen and (max-width: 600px) {
+  .slideScreen {
+    width: 98%;
+    margin: auto;
+    padding: 10px;
+  }
 }
 
 /****************************************
@@ -47,7 +53,7 @@
   width: 100%;
   max-width: 900px;
   height: auto;
-  min-height: 350px;
+  min-height: 300px;
   max-height: 400px;
   margin: 0 auto;
   padding: 0;
@@ -67,15 +73,14 @@
 @media screen and (max-width: 600px) {
   .slide-contents-box {
     width: 100%;
-    min-height: 280px;
+    max-height: 420px;
     margin: auto;
-    padding: 10px;
   }
 }
 
 .slide-contents {
   width: 100%;
-  min-height: 350px;
+  min-height: 300px;
   max-height: 400px;
   margin: auto;
   display: flex;
@@ -83,7 +88,6 @@
   align-content: center;
   align-items: center;
   justify-content: space-around;
-  overflow: hidden;
 }
 
 .slide-contents div:not(.preLoading) {
@@ -96,7 +100,8 @@
 .img-container {
   width: 100%;
   height: auto;
-  max-height: 100%;
+  min-height: 350px;
+  max-height: 400px;
   margin: 0;
   padding: 0;
   overflow: hidden;
@@ -116,6 +121,17 @@
   overflow: visible;
 }
 
+@media screen and (max-width: 600px) {
+  .img-container {
+    min-height: 200px;
+    max-height: 300px;
+  }
+  .has-bg-img {
+    min-height: 200px;
+    background-position: bottom 0px center;
+  }
+}
+
 .slide-contents p,
 .slide-contents span,
 .slide-contents ul,
@@ -123,6 +139,7 @@
 .slide-contents dl,
 .slide-contents dl div {
   width: 100%;
+  margin-bottom: 10px;
   text-align: left;
 }
 
