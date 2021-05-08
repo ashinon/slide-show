@@ -42,6 +42,7 @@ export default class Slider {
     this.setNextsEvent();
     this.addEventTouch();
     this.addEventScreenClick();
+    this.addEventArrowKeyDown();
     this.autoPlay();
   }
 
@@ -450,6 +451,19 @@ export default class Slider {
       },
       { passive: true }
     );
+  }
+
+  /**
+   * スライダーの左右キー押下に応じたイベントを付与する
+   */
+  addEventArrowKeyDown() {
+    document.addEventListener('keydown', event => {
+      if (event.key === 'ArrowRight') {
+        this.next.click();
+      } else if (event.key === 'ArrowLeft') {
+        this.prev.click();
+      }
+    });
   }
 
   /**
