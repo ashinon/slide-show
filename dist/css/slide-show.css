@@ -36,13 +36,24 @@
   );
   box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.1);
   text-align: center;
+
+/* iPadまで */
+@media screen and (min-width: 601px) and (max-width: 767px) {
+  .slideScreen {
+    width: 100%;
+    margin: 0;
+  }
+}
+
+@media screen and (min-width: 601px) and (max-width: 1400px) {
+  .slideScreen {
+    padding: 30px 10% 30px 10%;
+  }
 }
 
 @media screen and (max-width: 600px) {
   .slideScreen {
-    width: 98%;
-    margin: auto;
-    padding: 10px;
+    padding: 10px 10% 10px 10%;
   }
 }
 
@@ -233,44 +244,66 @@
 ****************************************/
 .slidePrev,
 .slideNext {
-  width: calc(2% + 25px);
-  min-width: 50px;
+  width: 0;
+  height: auto;
   position: relative;
   cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  z-index: 10;
 }
 
 .slidePrev:before,
 .slideNext:before {
-  height: 0;
-  width: 0;
+  width: 40px;
+  height: 40px;
+  margin-top: -4px;
   display: block;
   content: '';
+  border: 0px transparent solid;
+  border-top: solid 3px rgba(100, 100, 100, 0.3);
   position: absolute;
   top: calc(50% - 20px);
-  border: 40px transparent solid;
+  z-index: 11;
 }
 
 .slidePrev:before {
-  left: 0;
-  border-left-width: 0;
-  border-right-color: rgba(255, 255, 255, 0.7);
+  left: 55px;
+  border-left: solid 3px rgba(100, 100, 100, 0.3);
+  transform: rotate(-45deg);
+}
+.slideNext:before {
+  right: 55px;
+  border-right: solid 3px rgba(100, 100, 100, 0.3);
+  transform: rotate(45deg);
 }
 
-.slideNext:before {
-  right: 0;
-  border-right-width: 0;
-  border-left-color: rgba(255, 255, 255, 0.7);
+@media screen and (min-width: 768px) and (max-width: 1400px) {
+  .slidePrev:before {
+    left: 20px;
+  }
+  .slideNext:before {
+    right: 20px;
+  }
+}
+@media screen and (min-width: 601px) and (max-width: 767px) {
+  .slidePrev:before {
+    left: 15px;
+  }
+  .slideNext:before {
+    right: 15px;
+  }
 }
 
 @media screen and (max-width: 600px) {
-  .slidePrev,
-  .slideNext,
   .slidePrev:before,
   .slideNext:before {
-    display: none;
+    width: 30px;
+    height: 30px;
+  }
+  .slidePrev:before {
+    left: 15px;
+  }
+  .slideNext:before {
+    right: 15px;
   }
 }
 
