@@ -27,7 +27,7 @@ export default class Main {
    * @param {number} ms オートプレイのスピード
    */
   setSliderProp(target) {
-    const ms = 6000;
+    const ms = 9000;
     const dispTileList = false;
     const loopLimit = 1;
     this.slider = new Slider(target, SlideContents, ms, loopLimit, dispTileList);
