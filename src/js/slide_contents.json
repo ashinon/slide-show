@@ -10,28 +10,21 @@
   {
     "contents": [
       {
-        "tag": "h3",
-        "textContent": "いつの話か"
+        "tag": "div",
+        "textContent": "2019年11月、バンコクに行ってきました。"
       },
       {
         "tag": "div",
         "styles": {
-          "height": "300px",
-          "transform-origin": "center 70%",
-          "background-image": "url(dist/img/IMG_1560.jpeg)",
-          "background-repeat": "no-repeat",
-          "background-size": "cover",
-          "background-position": "center center"
-        }
-      }
-    ]
-  },
-  {
-    "contents": [
+          "height": "600px",
+          "background-image": "url(dist/img/skywork_03_IMG_1490.jpg)"
+        },
+        "classes": ["animatiom_top-to-bottom"]
+      },
       {
-        "tag": "div",
-        "styles": { "margin": "auto" },
-        "textContent": "2019年11月に3泊4日で行ってきました。"
+        "tag": "span",
+        "styles": { "text-align": "center" },
+        "textContent": "意外と都会でした。"
       }
     ]
   },
@@ -40,33 +33,257 @@
       {
         "tag": "h3",
         "textContent": "何をしたか"
-      },
-      {
-        "tag": "div",
-        "styles": {
-          "height": "300px",
-          "background-image": "url(dist/img/IMG_1648.jpeg)",
-          "background-repeat": "no-repeat",
-          "background-size": "50%",
-          "background-position": "center 64%"
-        }
       }
     ]
   },
   {
+    "styles": { "justify-content": "flex-start" },
     "contents": [
       {
+        "tag": "div",
+        "textContent": "いろんなタイのご飯を食べたり"
+      },
+      {
+        "tag": "div",
+        "styles": {
+          "height": "600px",
+          "background-image": "url(dist/img/karaitabemono_02_IMG_1476.jpg)"
+        },
+        "classes": ["animatiom_bottom-to-top"]
+      },
+      {
+        "tag": "span",
+        "styles": { "font-size": "small", "text-align": "right" },
+        "textContent": "一番凶悪だったたべもの"
+      }
+    ]
+  },
+  {
+    "styles": { "justify-content": "flex-start" },
+    "contents": [
+      {
+        "tag": "div",
+        "textContent": "電車や舟に乗ったり"
+      },
+      {
+        "tag": "div",
+        "styles": {
+          "height": "600px",
+          "background-image": "url(dist/img/fune_01_IMG_1544.JPG)"
+        },
+        "classes": ["animatiom_bottom-to-top"]
+      }
+    ]
+  },
+  {
+    "styles": { "justify-content": "flex-start" },
+    "contents": [
+      {
+        "tag": "div",
+        "textContent": "すごく速い観覧車にも乗りました！"
+      },
+      {
+        "tag": "div",
+        "styles": {
+          "height": "600px",
+          "background-image": "url(dist/img/kanransha_01_IMG_1532.jpg)"
+        },
+        "classes": ["animatiom_bottom-to-top"]
+      },
+      {
+        "tag": "span",
+        "styles": { "font-size": "small", "text-align": "right" },
+        "textContent": "速いので、一度に3周回ります。"
+      }
+    ]
+  },
+  {
+    "styles": { "justify-content": "flex-start" },
+    "contents": [
+      {
+        "tag": "div",
+        "textContent": "電車に乗ってお寺に行きました"
+      },
+      {
+        "tag": "div",
+        "styles": {
+          "height": "600px",
+          "background-image": "url(dist/img/chikatetsu_01_IMG_1545.JPG)"
+        },
+        "classes": ["animatiom_bottom-to-top"]
+      },
+      {
+        "tag": "span",
+        "styles": { "font-size": "small", "text-align": "right" },
+        "textContent": "お寺への道には詐欺師らしき人がウヨウヨいました…(衝撃)"
+      }
+    ]
+  },
+  {
+    "styles": { "justify-content": "flex-start" },
+    "contents": [
+      {
+        "tag": "div",
+        "textContent": "お寺は楽しい所でした！"
+      },
+      {
+        "tag": "div",
+        "styles": {
+          "height": "600px",
+          "background-image": "url(dist/img/tatemono_02_IMG_1572.JPG)"
+        },
+        "classes": ["animatiom_bottom-to-top"]
+      }
+    ]
+  },
+  {
+    "styles": { "justify-content": "flex-start" },
+    "contents": [
+      {
+        "tag": "div",
+        "textContent": "建物は、ほんのり沖縄感がある気がします"
+      },
+      {
+        "tag": "div",
+        "styles": {
+          "height": "600px",
+          "background-image": "url(dist/img/tatemono_05_IMG_1579.JPG)"
+        },
+        "classes": ["animatiom_bottom-to-top"]
+      }
+    ]
+  },
+  {
+    "styles": { "justify-content": "flex-start" },
+    "contents": [
+      {
+        "tag": "div",
+        "textContent": "中はというと、"
+      },
+      {
+        "tag": "div",
+        "styles": {
+          "height": "600px",
+          "background-image": "url(dist/img/mon_02_IMG_1582.jpeg)"
+        },
+        "classes": ["animatiom_bottom-to-top"]
+      }
+    ]
+  },
+  {
+    "styles": { "justify-content": "flex-start" },
+    "contents": [
+      {
+        "tag": "div",
+        "textContent": "黄金…"
+      },
+      {
+        "tag": "div",
+        "styles": {
+          "height": "600px",
+          "background-image": "url(dist/img/butsuzou_08_IMG_1584.jpeg)"
+        },
+        "classes": ["animatiom_to-left-while-focusing-out"]
+      }
+    ]
+  },
+  {
+    "styles": { "justify-content": "flex-start" },
+    "contents": [
+      {
+        "tag": "div",
+        "textContent": "黄金…"
+      },
+      {
+        "tag": "div",
+        "styles": {
+          "height": "900px",
+          "background-image": "url(dist/img/butsuzou_25_IMG_1621.jpeg)",
+          "background-position": "bottom left"
+        },
+        "classes": ["animatiom_zoom-up"]
+      }
+    ]
+  },
+  {
+    "styles": { "justify-content": "flex-start" },
+    "contents": [
+      {
+        "tag": "div",
+        "textContent": "とにかく黄金です！"
+      },
+      {
+        "tag": "div",
+        "styles": {
+          "height": "600px",
+          "background-image": "url(dist/img/butsuzou_31_IMG_1642.jpeg)"
+        },
+        "classes": ["animatiom_to-left-while-focusing-out"]
+      }
+    ]
+  },
+  {
+    "styles": { "justify-content": "flex-start" },
+    "contents": [
+      {
+        "tag": "div",
+        "textContent": "屋外には石にされた人達がいます"
+      },
+      {
+        "tag": "div",
+        "styles": {
+          "height": "600px",
+          "background-image": "url(dist/img/butsuzou_21_IMG_1609.jpeg)"
+        },
+        "classes": ["animatiom_zoom-out"]
+      }
+    ]
+  },
+  {
+    "styles": { "justify-content": "flex-start" },
+    "contents": [
+      {
+        "tag": "div",
+        "textContent": "けっこうアクロバティックな恰好で止まっています"
+      },
+      {
+        "tag": "div",
+        "styles": {
+          "height": "600px",
+          "background-image": "url(dist/img/butsuzou_32_IMG_1648.jpeg)"
+        },
+        "classes": ["animatiom_zoom-out"]
+      }
+    ]
+  },
+  {
+    "styles": { "justify-content": "flex-start" },
+    "contents": [
+      {
+        "tag": "div",
+        "textContent": "だるまさんが・・・ころんだ！"
+      },
+      {
+        "tag": "div",
+        "styles": {
+          "height": "600px",
+          "background-image": "url(dist/img/butsuzou_34_IMG_1651.jpeg)"
+        },
+        "classes": ["animatiom_zoom-out"]
+      }
+    ]
+  },
+  {
+    "styles": { "justify-content": "center" },
+    "contents": [
+      {
+        "tag": "div",
+        "styles": { "margin": "0 0 20px 0" },
+        "textContent": "こんな所へも行きました"
+      },
+      {
         "tag": "ul",
-        "list": [
-          "いろんなタイ料理のレストランでご飯を食べたり",
-          "お寺やパワースポットへ行ったり",
-          "満員電車に揺られたり",
-          "舟に乗ったり",
-          "市場へ行ったり",
-          "観覧車に乗ったり",
-          "マンゴーを食べたり",
-          "スカイウォークを歩いたり . . . etc"
-        ]
+        "list": ["スカイウォーク", "ナイトマーケット", "カフェやマンゴー屋さん", "パワースポット"]
       }
     ]
   },
@@ -74,50 +291,7 @@
     "contents": [
       {
         "tag": "h3",
-        "textContent": "印象に残ったことは"
-      },
-      {
-        "tag": "div",
-        "styles": {
-          "height": "300px",
-          "background-image": "url(dist/img/IMG_1606.jpeg)",
-          "background-repeat": "no-repeat",
-          "background-size": "cover",
-          "background-position": "center"
-        }
-      }
-    ]
-  },
-  {
-    "contents": [
-      {
-        "tag": "ul",
-        "list": [
-          "お寺にシュールな仏像がたくさんあった",
-          "仏像も建物も装飾が多くてきれいだった",
-          "食べ物全般が美味しかった",
-          "たまに凶悪に辛いものがあった",
-          "市場で食用の虫が売っていた"
-        ]
-      }
-    ]
-  },
-  {
-    "contents": [
-      {
-        "tag": "p",
-        "styles": { "text-align": "center" },
-        "textContent": "楽しかったのでまた行きたいです！"
-      },
-      {
-        "tag": "div",
-        "styles": {
-          "height": "300px",
-          "background-image": "url(dist/img/IMG_1651.jpeg)",
-          "background-repeat": "no-repeat",
-          "background-size": "50%",
-          "background-position": "center"
-        }
+        "textContent": "おわり"
       }
     ]
   }

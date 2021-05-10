@@ -371,3 +371,92 @@
     transform: rotate(360deg);
   }
 }
+
+/****************************************
+  画像用のアニメーション
+****************************************/
+/* 下へ上へ移動 */
+.animatiom_top-to-bottom {
+  min-height: 600px;
+  animation: top-to-bottom 8s 1 alternate;
+  transform: translateY(calc(0% - (100% - 400px)));
+}
+@keyframes bottom-to-top {
+  0% {
+    transform: translateY(calc(0% - (100% - 400px)));
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+/* 上から下へ移動 */
+.animatiom_bottom-to-top {
+  animation: bottom-to-top 8s 1 alternate;
+  transform: translateY(0%);
+}
+@keyframes top-to-bottom {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(calc(0% - (100% - 400px)));
+  }
+}
+
+/* 等倍から始まりズームさせる */
+.animatiom_zoom-up {
+  animation: zoom-up 8s 1 alternate;
+  transform: scale(1.2, 1.2);
+}
+@keyframes zoom-up {
+  0% {
+    transform: scale(1, 1);
+  }
+  100% {
+    transform: scale(1.2, 1.2);
+  }
+}
+
+/* ズームから始まり縮小させる */
+.animatiom_zoom-out {
+  animation: zoom-out 8s 1 alternate;
+  transform: scale(1, 1);
+}
+@keyframes zoom-out {
+  0% {
+    transform: scale(2.5, 2.5);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}
+
+/* 縮小させつつ右から左へ移動 */
+.animatiom_to-left-while-focusing-out {
+  animation: to-left-while-focusing-out 8s 1 alternate;
+  transform: translate(0%, 0%) scale(1, 1);
+}
+@keyframes to-left-while-focusing-out {
+  0% {
+    transform: translate(70%, -25%) scale(2.5, 2.5);
+  }
+  100% {
+    transform: translate(0%, 0%) scale(1, 1);
+  }
+}
+
+/* 縮小させつつ左下から右上へ移動 */
+.animatiom_to-right-while-focusing-out {
+  animation: to-right-while-focusing-out 8s 1 alternate;
+  transform: translate(0%, 0%) scale(1, 1);
+}
+@keyframes to-right-while-focusing-out {
+  0% {
+    transform: translate(-20%, -50%) scale(1.5, 1.5);
+  }
+  100% {
+    transform: translate(0%, 0%) scale(1, 1);
+  }
+}
+
