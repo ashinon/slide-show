@@ -16,8 +16,9 @@
       {
         "tag": "div",
         "styles": {
-          "height": "600px",
-          "background-image": "url(dist/img/skywork_03_IMG_1490.jpg)"
+          "height": "900px",
+          "background-image": "url(dist/img/skywork_03_IMG_1490.jpg)",
+          "background-position": "bottom center"
         },
         "classes": ["animatiom_top-to-bottom"]
       },
@@ -63,12 +64,12 @@
     "contents": [
       {
         "tag": "div",
-        "textContent": "電車や舟に乗ったり"
+        "textContent": "舟に乗ったり"
       },
       {
         "tag": "div",
         "styles": {
-          "height": "600px",
+          "height": "700px",
           "background-image": "url(dist/img/fune_01_IMG_1544.JPG)"
         },
         "classes": ["animatiom_bottom-to-top"]
@@ -85,7 +86,7 @@
       {
         "tag": "div",
         "styles": {
-          "height": "600px",
+          "height": "650px",
           "background-image": "url(dist/img/kanransha_01_IMG_1532.jpg)"
         },
         "classes": ["animatiom_bottom-to-top"]
@@ -102,15 +103,15 @@
     "contents": [
       {
         "tag": "div",
-        "textContent": "電車に乗ってお寺に行きました"
+        "textContent": "電車に乗ってお寺にも行きました"
       },
       {
         "tag": "div",
         "styles": {
-          "height": "600px",
+          "min-height": "300px",
           "background-image": "url(dist/img/chikatetsu_01_IMG_1545.JPG)"
         },
-        "classes": ["animatiom_bottom-to-top"]
+        "classes": ["animatiom_zoom-up"]
       },
       {
         "tag": "span",
@@ -129,10 +130,10 @@
       {
         "tag": "div",
         "styles": {
-          "height": "600px",
+          "height": "800px",
           "background-image": "url(dist/img/tatemono_02_IMG_1572.JPG)"
         },
-        "classes": ["animatiom_bottom-to-top"]
+        "classes": ["animatiom_move-to-top-to-zoom"]
       }
     ]
   },
@@ -141,15 +142,16 @@
     "contents": [
       {
         "tag": "div",
-        "textContent": "建物は、ほんのり沖縄感がある気がします"
+        "textContent": "建物がすごく華やかでキラキラしています"
       },
       {
         "tag": "div",
         "styles": {
-          "height": "600px",
-          "background-image": "url(dist/img/tatemono_05_IMG_1579.JPG)"
+          "height": "700px",
+          "max-height": "300px",
+          "background-image": "url(dist/img/tatemono_08_IMG_1588.jpg)"
         },
-        "classes": ["animatiom_bottom-to-top"]
+        "classes": ["animatiom_zoom-out"]
       }
     ]
   },
@@ -164,7 +166,7 @@
         "tag": "div",
         "styles": {
           "height": "600px",
-          "background-image": "url(dist/img/mon_02_IMG_1582.jpeg)"
+          "background-image": "url(dist/img/mon_02_IMG_1582.jpg)"
         },
         "classes": ["animatiom_bottom-to-top"]
       }
@@ -181,7 +183,7 @@
         "tag": "div",
         "styles": {
           "height": "600px",
-          "background-image": "url(dist/img/butsuzou_08_IMG_1584.jpeg)"
+          "background-image": "url(dist/img/butsuzou_08_IMG_1584.jpg)"
         },
         "classes": ["animatiom_to-left-while-focusing-out"]
       }
@@ -197,11 +199,11 @@
       {
         "tag": "div",
         "styles": {
-          "height": "900px",
-          "background-image": "url(dist/img/butsuzou_25_IMG_1621.jpeg)",
-          "background-position": "bottom left"
+          "height": "950px",
+          "background-image": "url(dist/img/butsuzou_25_IMG_1621.jpg)",
+          "background-position": "top left"
         },
-        "classes": ["animatiom_zoom-up"]
+        "classes": ["animatiom_to-right-while-focusing-out"]
       }
     ]
   },
@@ -215,8 +217,10 @@
       {
         "tag": "div",
         "styles": {
-          "height": "600px",
-          "background-image": "url(dist/img/butsuzou_31_IMG_1642.jpeg)"
+          "height": "500px",
+          "background-image": "url(dist/img/butsuzou_31_IMG_1642.jpg)",
+          "background-size": "100% auto",
+          "background-position": "30% 55%"
         },
         "classes": ["animatiom_to-left-while-focusing-out"]
       }
@@ -232,8 +236,10 @@
       {
         "tag": "div",
         "styles": {
-          "height": "600px",
-          "background-image": "url(dist/img/butsuzou_21_IMG_1609.jpeg)"
+          "width": "100%",
+          "background-image": "url(dist/img/butsuzou_21_IMG_1609.jpg)",
+          "background-position": "center center",
+          "background-size": "100% auto"
         },
         "classes": ["animatiom_zoom-out"]
       }
@@ -244,32 +250,37 @@
     "contents": [
       {
         "tag": "div",
-        "textContent": "けっこうアクロバティックな恰好で止まっています"
+        "textContent": "中の仏像よりも数が多そうでした。"
+      },
+      {
+        "tag": "div",
+        "styles": {
+          "height": "900px",
+          "background-image": "url(dist/img/butsuzou_20_IMG_1607.jpg)"
+        },
+        "classes": ["animatiom_zoom-out"]
+      }
+    ]
+  },
+  {
+    "styles": { "justify-content": "flex-start" },
+    "contents": [
+      {
+        "tag": "div",
+        "textContent": "お気に入りはこの人たちです！"
       },
       {
         "tag": "div",
         "styles": {
           "height": "600px",
-          "background-image": "url(dist/img/butsuzou_32_IMG_1648.jpeg)"
+          "background-image": "url(dist/img/butsuzou_34_IMG_1651.jpg)"
         },
         "classes": ["animatiom_zoom-out"]
-      }
-    ]
-  },
-  {
-    "styles": { "justify-content": "flex-start" },
-    "contents": [
+      },
       {
-        "tag": "div",
+        "tag": "span",
+        "styles": { "font-size": "small", "text-align": "right" },
         "textContent": "だるまさんが・・・ころんだ！"
-      },
-      {
-        "tag": "div",
-        "styles": {
-          "height": "600px",
-          "background-image": "url(dist/img/butsuzou_34_IMG_1651.jpeg)"
-        },
-        "classes": ["animatiom_zoom-out"]
       }
     ]
   },
