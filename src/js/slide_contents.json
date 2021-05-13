@@ -70,7 +70,7 @@
         "tag": "div",
         "styles": {
           "height": "700px",
-          "background-image": "url(dist/img/fune_01_IMG_1544.JPG)"
+          "background-image": "url(dist/img/fune_01_IMG_1544.jpg)"
         },
         "classes": ["animatiom_bottom-to-top"]
       }
@@ -109,7 +109,7 @@
         "tag": "div",
         "styles": {
           "min-height": "300px",
-          "background-image": "url(dist/img/chikatetsu_01_IMG_1545.JPG)"
+          "background-image": "url(dist/img/chikatetsu_01_IMG_1545.jpg)"
         },
         "classes": ["animatiom_zoom-up"]
       },
@@ -131,7 +131,7 @@
         "tag": "div",
         "styles": {
           "height": "800px",
-          "background-image": "url(dist/img/tatemono_02_IMG_1572.JPG)"
+          "background-image": "url(dist/img/tatemono_02_IMG_1572.jpg)"
         },
         "classes": ["animatiom_move-to-top-to-zoom"]
       }
