@@ -8,6 +8,7 @@
   min-height: 430px;
   margin: auto, auto, 50px, auto;
   position: relative;
+  box-sizing: border-box;
 }
 
 .slideNavi {
@@ -24,6 +25,9 @@
 
 .slideScreen {
   width: 80%;
+  height: auto;
+  min-height: 510px;
+  max-height: calc(100% - 50px);
   margin: 0;
   padding: 30px;
   opacity: 1;
@@ -37,23 +41,16 @@
   overflow: hidden;
 }
 
-/* iPadまで */
-@media screen and (min-width: 601px) and (max-width: 767px) {
-  .slideScreen {
-    width: 100%;
-    margin: 0;
-  }
-}
-
 @media screen and (min-width: 601px) and (max-width: 1400px) {
   .slideScreen {
     padding: 30px 10% 30px 10%;
   }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 896px) {
   .slideScreen {
     width: 100%;
+    height: 100%;
     margin: 0;
     padding: 10px 10% 10px 10%;
   }
@@ -65,7 +62,9 @@
 .slide-contents-box {
   width: 100%;
   max-width: 900px;
-  height: auto;
+  height: 100%;
+  min-height: 300px;
+  max-height: calc(90vh - 60px);
   margin: 0 auto;
   padding: 0;
   text-align: center;
@@ -84,6 +83,7 @@
 @media screen and (max-width: 600px) {
   .slide-contents-box {
     width: 100%;
+    height: 100%;
     max-height: 420px;
     margin: auto;
   }
@@ -92,8 +92,6 @@
 .slide-contents {
   width: 100%;
   height: auto;
-  min-height: 300px;
-  max-height: calc(90vh - 60px);
   margin: auto;
   display: flex;
   flex-direction: column;
